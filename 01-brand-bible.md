@@ -94,51 +94,68 @@ authentic        genuine          guaranteed       certified
 
 ---
 
-## 5. Naming shortlist
+## 5. The name — Mörk
 
-Pick one. Buy the .com, lock all 3 TikTok handles + IG, register Klaviyo and Shopify on the same name. **Do this within 24 hours of choosing.**
+**Locked. Pronounced "merk" or "murk" (rhymes with work).**
 
-Criteria for the name:
-- One word, 5–8 letters
-- Not in English dictionary (or used unusually)
-- No clear competitor on Google page 1
-- Pronounceable but ambiguous origin
-- No tribal/cringe associations
+Why this name:
+- Four letters — short, typeable, defensible
+- Scandinavian — Swedish for "dark." Ambiguous origin.
+- Not a real English word — searchable space is wide open
+- The umlaut adds visual distinctiveness in the wordmark
+- Reads as institutional / archival / quiet
+- Works as audio: "M ö r k" — voiceover-friendly
+- Carries no tribal or cringe associations
 
-### Shortlist (test before committing)
+### Verification protocol (Day 1)
 
-**Group A — coded/institutional:**
-- `Maison 042`
-- `Section B`
-- `Atelier 7`
-- `Lot & Estate`
+Run through these in order. Fall back only if blocked.
 
-**Group B — single-word, ambiguous:**
-- `Hörst`
-- `Vellum`
-- `Anker`
-- `Forme`
-- `Mörk`
-- `Verge`
-- `Soren`
-- `Nocturne`
-- `Solen`
-- `Korbin`
+```
+[ ] mörk.com / mork.com         (preferred)
+[ ] mork.archive                (excellent fallback, on-brand)
+[ ] morkarchive.com
+[ ] mork.co
+[ ] mork.studio
 
-**Group C — two-word, archival:**
-- `Field & Estate`
-- `North Vault`
-- `Archive Section`
-- `The Standing Order`
+TikTok handles (priority order):
+[ ] @mork                        (gold if available)
+[ ] @mork.archive                (excellent)
+[ ] @morkarchive                 (acceptable)
+[ ] Plus matching .field and .notes variants
 
-### Selection process
+Instagram, X: lock matching handle even if not used immediately
+```
 
-1. Pick top 3 from above (or invent your own using the same criteria).
-2. Check `.com` availability. If `.com` is taken, kill it.
-3. Check TikTok handle availability for the brand and `.field` and `.notes` variants.
-4. Google the name. If anyone in fashion / horology / design uses it, kill it.
-5. Say it out loud in a voiceover sample. If it sounds like a real estate handler announcing it on a phone, keep it.
-6. Lock it. Buy everything immediately.
+**Never add numbers to handles** (`@mork99` reads amateur). If `@mork` and `@mork.archive` variants are all taken, fall back to backup name #1 below.
+
+### Backup names (if Mörk is fully blocked)
+
+In priority order:
+
+1. **Vellum** — `vellum.archive`, `vellum.co`. Note: a fintech brand owns `vellum.com`. Use the `.archive` or `.co` variant.
+2. **Korr** — short, invented. Suggests "correspondence" or "corridor." Domain availability strong.
+3. **Sondr** — Scandinavian root meaning "to gather." Invented spelling. Domain availability strong.
+
+All other decisions in this kit (voice, color, fonts, structure) remain identical regardless of which name you end up with.
+
+### The handler signature
+
+Every email, dossier card, and customer reply is signed:
+
+```
+— Section B
+```
+
+Or sometimes just:
+
+```
+— S.B.
+```
+
+Section B is the institutional unit within Mörk that handles correspondence and acquisitions. It is the only "person" customers ever interact with.
+
+The rubber stamp on dossier cards reads `S.B.` in a small monogram block.
 
 ---
 

@@ -80,37 +80,35 @@ Day 35  ★ $5K CUMULATIVE TARGET (median).
 
 ## Day 1 — Lock the namespace (2 hours)
 
-The name is **Mörk** (committed in [01-brand-bible.md](./01-brand-bible.md)). The verification protocol:
+The name is **Kairo** (committed in [01-brand-bible.md](./01-brand-bible.md)). The verification protocol:
 
 ```
-[ ] Check mörk.com (Namecheap, Google Domains)
-    If taken, fall back in this order:
-       mork.archive
-       morkarchive.com
-       morkco.com
-       mork.studio
+[ ] Check kairo.co / kairoarchive.com / kairo.studio
+    Priority order:
+       kairo.co              (cleanest)
+       kairoarchive.com      (on-brand fallback)
+       kairo.studio          (acceptable)
+       getkairo.com          (last resort)
 
-[ ] TikTok handles (in order of priority):
-       @mork              ← if available, gold
-       @mork.archive      ← excellent fallback
-       @morkarchive       ← acceptable
-    Plus the same patterns for:
-       @mork.field
-       @mork.notes
+[ ] TikTok handles (priority order):
+       @kairo               ← if available, gold
+       @kairo.archive       ← excellent
+       @kairoarchive        ← acceptable
+    Plus:
+       @kairo.field
+       @kairo.notes
 
 [ ] Instagram handle: same priority
 [ ] X / Twitter handle: same (low priority but lock it)
-[ ] Klaviyo account: register under "Mörk"
+[ ] Klaviyo account: register under "Kairo"
 [ ] Shopify trial: register store with chosen domain
 [ ] Email forwarding setup:
        correspondence@[domain]  → your inbox
 ```
 
-If `@mork` is taken on TikTok, **do not** add numbers (`@mork99`). Step down to `@mork.archive` instead. Numbered handles look amateur.
+If `@kairo` is taken on TikTok, step down to `@kairo.archive`. Never add numbers.
 
-If both `mork` AND `mork.archive` variants are unavailable, fall back to second name: **Vellum** → **Korr** (in that order). All other decisions in this kit stay the same.
-
-**Time-box this:** 2 hours max. If you can't lock the namespace by lunch on day 1, you're over-thinking. Pick first available variant and move on.
+**Time-box this:** 2 hours max. Pick first available variant and move on.
 
 ---
 
@@ -119,24 +117,26 @@ If both `mork` AND `mork.archive` variants are unavailable, fall back to second 
 You don't need 10 pages on day 2. You need 1 page.
 
 ```
-NAME             Mörk
+NAME             Kairo
 TAGLINE          Selected, not designed.
-HANDLER NAME     Section B (signs all correspondence as "— S.B.")
+HANDLER NAME     Section K (signs all correspondence as "— K.")
 WORLD            An archive of unbranded mechanical objects,
                  recovered from estates that may or may not be real.
 
 VOICE            Past tense. Passive. 8–12 words/sentence.
                  No "you," "your," "we're," exclamation, emoji.
 
-COLORS           #0F0E0D off-black
-                 #E8E2D5 cream
+COLORS           #0C0B0A vault black (store bg)
+                 #1A1816 charcoal (cards)
+                 #D4CFC6 bone (primary text)
+                 #8A8279 stone (secondary text)
                  #7A2A20 oxidized red (single accent)
 
 FONTS            Cormorant Garamond (serif)
                  JetBrains Mono (mono)
 
-LUT              Desaturate -25, lift blacks +15, cool -300K,
-                 grain 25, vignette -15
+LUT              Exposure -0.5, lift blacks +8, cool -200K,
+                 desaturate -25, grain 20, vignette -20
 
 VOICE (audio)    ElevenLabs design: low male, ~30-40, ambiguous
                  European, slow cadence, flat affect
@@ -193,7 +193,7 @@ Then generate 50 voiceover clips:
 - 30 mythology lines from [07-mythology-bank.md](./07-mythology-bank.md)
 - 20 stock phrases ("Available now," "Origin unconfirmed," "Lot zero zero four nine," etc.)
 
-Save all `.wav` files to a folder named `Mörk/voice/lib/`. Backup to Drive.
+Save all `.wav` files to a folder named `Kairo/voice/lib/`. Backup to Drive.
 
 Generate 30 mythologies via Claude using the system prompt in [06-ai-workflow.md](./06-ai-workflow.md). Save to a Notion table.
 

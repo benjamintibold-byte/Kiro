@@ -31,13 +31,14 @@ After installing Dawn, make these changes in **Online Store → Themes → Custo
 ### Theme settings → Colors
 
 ```
-Background          #E8E2D5    (cream)
-Background 2        #0F0E0D    (off-black)
-Text                #0F0E0D
-Buttons             #0F0E0D background, #E8E2D5 text
-Outline button      #0F0E0D border, transparent background
-Accent 1            #7A2A20    (oxidized red — pick yours)
-Accent 2            #7A756D    (warm gray)
+Background 1:       #0C0B0A    (vault black)
+Background 2:       #1A1816    (charcoal)
+Text:               #D4CFC6    (bone)
+Buttons bg:         transparent (or #0C0B0A)
+Buttons text:       #D4CFC6
+Outline button:     #2A2725 border, transparent background
+Accent 1:           #7A2A20    (oxidized red)
+Accent 2:           #8A8279    (stone)
 ```
 
 ### Theme settings → Typography
@@ -222,6 +223,14 @@ LOT        0049-A
 ### Product page CSS (paste into `assets/base.css` or theme custom CSS)
 
 ```css
+/* See full dark-mode CSS in 02-visual-system.md section 9 */
+/* Key values for the dark store: */
+
+body {
+  background: #0C0B0A;
+  color: #D4CFC6;
+}
+
 .product-archive {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -230,35 +239,36 @@ LOT        0049-A
   margin: 4rem auto;
   padding: 0 2rem;
   font-family: 'Cormorant Garamond', serif;
-  color: #0F0E0D;
+  color: #D4CFC6;
 }
 
 .product-archive__hero img {
   width: 100%;
   height: auto;
   display: block;
+  border: 1px solid #1A1816;
 }
 
 .lot-number {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
-  letter-spacing: 0.05em;
-  color: #7A756D;
-  margin: 0 0 1rem 0;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  color: #8A8279;
+  margin: 0 0 1.5rem 0;
 }
 
 .product-title {
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 500;
   margin: 0 0 2rem 0;
   letter-spacing: 0.01em;
 }
 
 .mythology {
-  font-size: 14px;
+  font-size: 15px;
   font-style: italic;
   line-height: 1.7;
-  color: #3A3633;
+  color: #8A8279;
   margin-bottom: 3rem;
   max-width: 32em;
 }
@@ -266,43 +276,50 @@ LOT        0049-A
 .metadata {
   font-family: 'JetBrains Mono', monospace;
   font-size: 11px;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
   display: grid;
   grid-template-columns: 100px 1fr;
-  row-gap: 0.5rem;
+  row-gap: 0.6rem;
   margin-bottom: 3rem;
-  color: #3A3633;
+  padding: 1.5rem;
+  background: #1A1816;
+  border: 1px solid #2A2725;
 }
 
 .metadata dt {
-  color: #7A756D;
+  color: #8A8279;
+  text-transform: uppercase;
+  font-size: 10px;
 }
 
 .metadata dd {
   margin: 0;
+  color: #D4CFC6;
 }
 
 .price {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 14px;
+  font-size: 16px;
   margin: 0 0 2rem 0;
 }
 
 .btn-acquire {
-  background: #0F0E0D;
-  color: #E8E2D5;
-  border: none;
+  background: transparent;
+  color: #D4CFC6;
+  border: 1px solid #2A2725;
   padding: 1rem 3rem;
   font-family: 'JetBrains Mono', monospace;
   font-size: 11px;
   letter-spacing: 0.15em;
   text-transform: lowercase;
   cursor: pointer;
-  transition: opacity 0.2s ease;
+  transition: all 0.3s ease;
 }
 
 .btn-acquire:hover {
-  opacity: 0.85;
+  background: #7A2A20;
+  border-color: #7A2A20;
+  color: #E8E2D5;
 }
 
 @media (max-width: 768px) {

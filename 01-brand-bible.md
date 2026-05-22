@@ -94,68 +94,57 @@ authentic        genuine          guaranteed       certified
 
 ---
 
-## 5. The name — Mörk
+## 5. The name — Kairo
 
-**Locked. Pronounced "merk" or "murk" (rhymes with work).**
+**Locked.**
 
 Why this name:
-- Four letters — short, typeable, defensible
-- Scandinavian — Swedish for "dark." Ambiguous origin.
-- Not a real English word — searchable space is wide open
-- The umlaut adds visual distinctiveness in the wordmark
-- Reads as institutional / archival / quiet
-- Works as audio: "M ö r k" — voiceover-friendly
+- Five letters — short, powerful, globally pronounceable
+- Sounds like "Cairo" — evokes ancient trade routes, old-world mystery, desert archaeology
+- Not a real English word — unique namespace
+- Works as audio: "K a i r o" — voiceover-friendly, clean
 - Carries no tribal or cringe associations
+- Looks institutional in monospace: `KAIRO`
+- The "K" gives strong visual weight in a wordmark
 
-### Verification protocol (Day 1)
-
-Run through these in order. Fall back only if blocked.
+### Domain priority (Day 1)
 
 ```
-[ ] mörk.com / mork.com         (preferred)
-[ ] mork.archive                (excellent fallback, on-brand)
-[ ] morkarchive.com
-[ ] mork.co
-[ ] mork.studio
+[ ] kairo.co                     (preferred — clean, modern)
+[ ] kairoarchive.com             (excellent fallback, on-brand)
+[ ] kairo.studio                 (acceptable)
+[ ] getkairo.com                 (last resort)
 
 TikTok handles (priority order):
-[ ] @mork                        (gold if available)
-[ ] @mork.archive                (excellent)
-[ ] @morkarchive                 (acceptable)
-[ ] Plus matching .field and .notes variants
+[ ] @kairo                       (gold if available)
+[ ] @kairo.archive               (excellent)
+[ ] @kairoarchive                (acceptable)
+Plus:
+[ ] @kairo.field
+[ ] @kairo.notes
 
-Instagram, X: lock matching handle even if not used immediately
+Instagram, X: lock matching handle
 ```
 
-**Never add numbers to handles** (`@mork99` reads amateur). If `@mork` and `@mork.archive` variants are all taken, fall back to backup name #1 below.
-
-### Backup names (if Mörk is fully blocked)
-
-In priority order:
-
-1. **Vellum** — `vellum.archive`, `vellum.co`. Note: a fintech brand owns `vellum.com`. Use the `.archive` or `.co` variant.
-2. **Korr** — short, invented. Suggests "correspondence" or "corridor." Domain availability strong.
-3. **Sondr** — Scandinavian root meaning "to gather." Invented spelling. Domain availability strong.
-
-All other decisions in this kit (voice, color, fonts, structure) remain identical regardless of which name you end up with.
+**Never add numbers to handles.** If `@kairo` is taken, step to `@kairo.archive`.
 
 ### The handler signature
 
 Every email, dossier card, and customer reply is signed:
 
 ```
-— Section B
+— Section K
 ```
 
 Or sometimes just:
 
 ```
-— S.B.
+— K.
 ```
 
-Section B is the institutional unit within Mörk that handles correspondence and acquisitions. It is the only "person" customers ever interact with.
+Section K is the institutional unit within Kairo that handles correspondence and acquisitions. It is the only "person" customers ever interact with.
 
-The rubber stamp on dossier cards reads `S.B.` in a small monogram block.
+The rubber stamp on dossier cards reads `K.` in a minimal monogram block.
 
 ---
 

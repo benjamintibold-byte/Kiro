@@ -1,11 +1,11 @@
-# MÖRK — OPERATOR KIT
+# KAIRO — OPERATOR KIT
 
-A complete, operator-grade setup for **Mörk** — a faceless Shopify brand built around unbranded mechanical watches and archive-aesthetic objects, framed as recoveries from fictional estates.
+A complete, operator-grade setup for **Kairo** — a faceless Shopify brand built around unbranded mechanical watches and archive-aesthetic objects, framed as recoveries from fictional estates.
 
 ```
-Brand:        Mörk  (pronounced "merk")
+Brand:        Kairo
 Tagline:      Selected, not designed.
-Handler:      Section B
+Handler:      Section K
 Concept:      An archive of unbranded objects.
 ```
 
@@ -52,12 +52,14 @@ These are committed. Don't re-debate them. Execute.
 
 | Decision | Locked value |
 |---|---|
-| Brand name | **Mörk** (fallbacks: Vellum, Korr, Sondr) |
+| Brand name | **Kairo** |
 | Tagline | *Selected, not designed.* |
-| Handler signature | *— Section B* (stamp: `S.B.`) |
-| Off-black | `#0F0E0D` |
-| Cream | `#E8E2D5` |
-| Accent color | `#7A2A20` (oxidized red) |
+| Handler signature | *— Section K* (stamp: `K.`) |
+| Store background | `#0C0B0A` (true deep black) |
+| Card/content bg | `#1A1816` (charcoal-black) |
+| Text primary | `#D4CFC6` (warm off-white) |
+| Text secondary | `#8A8279` (muted stone) |
+| Accent color | `#7A2A20` (oxidized red — wax seals, single highlights only) |
 | Serif font | Cormorant Garamond, weight 400/500 |
 | Mono font | JetBrains Mono, weight 400 |
 | Voice | ElevenLabs custom: low male, ambiguous European, ~30–40, slow, flat |
@@ -67,7 +69,7 @@ These are committed. Don't re-debate them. Execute.
 | Discount policy | None. Forever. |
 | Face on camera | Never |
 | Posting cadence | 14 main / 4 field / 5 notes per week |
-| Email signoff | *— Section B* |
+| Email signoff | *— Section K* |
 
 ---
 
@@ -83,21 +85,21 @@ If you can't commit to this rule for 12 months, do not start. The rule is the mo
 
 ## The method in one paragraph
 
-You build **Mörk**, a faceless Shopify brand framed as an archive of unbranded mechanical watches and objects, posed as recoveries from fictional estates. You source from 1688/Yupoo at $12–20 per piece and sell at $89–179, anchored by occasional $600+ Single Lots. The store is a museum interface, not an ecom site — no discounts, no CTAs, no popups, no faces, ever. You run three TikTok accounts as a content network — `@mork` (dossier reels), `@mork.field` (ambient world), `@mork.notes` (text on black) — posting 2 reels/day on the main with strict aesthetic and audio consistency. Every estate launches as a 5–7 day content arc that creates appointment viewing. AI handles mythology generation and voiceover; you batch-shoot weekly with one LUT and one voice. Packaging includes a printed dossier card and a fictional polaroid that turns every customer into a free UGC node. A private list called The Ledger captures your top 5% buyers for repeat revenue. Discipline over time is the moat — competitors can copy a video, but they can't compress 12 months of consistent fiction.
+You build **Kairo**, a faceless Shopify brand framed as an archive of unbranded mechanical watches and objects, posed as recoveries from fictional estates. You source from 1688/Yupoo at $12–20 per piece and sell at $89–179, anchored by occasional $600+ Single Lots. The store is a dark museum interface, not an ecom site — no discounts, no CTAs, no popups, no faces, ever. You run three TikTok accounts as a content network — `@kairo` (dossier reels), `@kairo.field` (ambient world), `@kairo.notes` (text on black) — posting 2 reels/day on the main with strict aesthetic and audio consistency. Every estate launches as a 5–7 day content arc that creates appointment viewing. AI handles mythology generation and voiceover; you batch-shoot weekly with one LUT and one voice. Packaging includes a printed dossier card and a fictional polaroid that turns every customer into a free UGC node. A private list called The Ledger captures your top 5% buyers for repeat revenue. Discipline over time is the moat — competitors can copy a video, but they can't compress 12 months of consistent fiction.
 
 ---
 
 ## Day 1 checklist (do this NOW)
 
 ```
-[ ] Verify mörk.com or mork.archive availability — buy immediately
-[ ] Reserve @mork (or @mork.archive) on TikTok, Instagram
-[ ] Reserve @mork.field and @mork.notes on TikTok
+[ ] Buy kairo domain (kairo.co / kairoarchive.com / kairo.studio)
+[ ] Reserve @kairo on TikTok, Instagram
+[ ] Reserve @kairo.field and @kairo.notes on TikTok
 [ ] Open Shopify trial under the chosen domain
 [ ] Open Klaviyo account
 [ ] Open ElevenLabs account
 [ ] Open Notion / Airtable for asset library
-[ ] Order rubber stamp with "S.B." monogram (~$15)
+[ ] Order rubber stamp engraved "K." (~$15)
 [ ] Order phone macro lens (~$20)
 [ ] Begin 1688 / Yupoo browsing for first 3 sample SKUs
 ```

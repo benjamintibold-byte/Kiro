@@ -11,6 +11,8 @@
         <img
           src="{{ section.settings.image | image_url: width: 1400 }}"
           alt="{{ section.settings.image.alt | default: 'Tisidian archive' }}"
+          width="{{ section.settings.image.width }}"
+          height="{{ section.settings.image.height }}"
           loading="lazy"
         >
       </div>

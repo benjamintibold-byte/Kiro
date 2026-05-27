@@ -1,0 +1,93 @@
+{%- comment -%}
+  TISIDIAN — Section Heading
+  Centered ALL CAPS heading with two horizontal lines and an italic tagline below.
+  Use it before each major homepage block (Signature, Essentials, Accessories).
+{%- endcomment -%}
+
+<div class="tis-section-heading" style="background: {{ section.settings.bg_color }};">
+  <div class="tis-section-heading__inner">
+    <span class="tis-section-heading__line"></span>
+    <h2 class="tis-section-heading__title">{{ section.settings.title }}</h2>
+    <span class="tis-section-heading__line"></span>
+  </div>
+  {%- if section.settings.tagline != blank -%}
+    <p class="tis-section-heading__tagline">{{ section.settings.tagline }}</p>
+  {%- endif -%}
+</div>
+
+<style>
+  .tis-section-heading {
+    text-align: center;
+    padding: 80px 24px 32px;
+  }
+  .tis-section-heading__inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    margin-bottom: 14px;
+  }
+  .tis-section-heading__line {
+    width: 48px;
+    height: 1px;
+    background: #9590A8;
+    opacity: 0.5;
+  }
+  .tis-section-heading__title {
+    font-family: 'Cormorant Garamond', 'Cinzel', serif !important;
+    font-weight: 500 !important;
+    font-size: 28px !important;
+    letter-spacing: 0.2em !important;
+    color: #F2EFE8 !important;
+    text-transform: uppercase !important;
+    margin: 0 !important;
+  }
+  .tis-section-heading__tagline {
+    font-family: 'Inter', sans-serif !important;
+    font-style: italic !important;
+    font-size: 14px !important;
+    color: #9590A8 !important;
+    margin: 0 !important;
+    letter-spacing: 0.02em;
+  }
+
+  @media (max-width: 749px) {
+    .tis-section-heading { padding: 56px 16px 24px; }
+    .tis-section-heading__title { font-size: 22px !important; letter-spacing: 0.18em !important; }
+    .tis-section-heading__line { width: 32px; }
+    .tis-section-heading__tagline { font-size: 13px !important; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "TIS Section Heading",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title (ALL CAPS used as is)",
+      "default": "SIGNATURE"
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline (italic, below the title)",
+      "default": "The cornerstone of Tisidian."
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#0A0813"
+    }
+  ],
+  "presets": [
+    {
+      "name": "TIS Section Heading"
+    }
+  ]
+}
+{% endschema %}

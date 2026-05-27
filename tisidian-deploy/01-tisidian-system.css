@@ -1,0 +1,281 @@
+/* ═══════════════════════════════════════════════════════════════
+   TISIDIAN — OBSIDIAN MYTHOS DESIGN SYSTEM
+   Version: 1.0
+   Telepítés: paste this entire block at the TOP of base.css
+   ═══════════════════════════════════════════════════════════════ */
+
+:root {
+  /* Backgrounds */
+  --tis-obsidian:   #0A0813;
+  --tis-ink:        #14101F;
+  --tis-mist:       #1F1A2E;
+  --tis-veil:       #2A2440;
+
+  /* Text */
+  --tis-bone:       #F2EFE8;
+  --tis-smoke:      #9590A8;
+  --tis-ash:        #5B5670;
+
+  /* Accents */
+  --tis-gold:       #C9A96E;
+  --tis-gold-glow:  #E0C088;
+  --tis-crimson:    #6B1F2C;
+  --tis-diamond:    #E8E6F0;
+}
+
+/* ── Global ── */
+body {
+  background: var(--tis-obsidian) !important;
+  color: var(--tis-bone) !important;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Hero / H1 ── */
+.banner__heading,
+h1.h1,
+h1 {
+  font-family: 'Cormorant Garamond', 'Cinzel', serif !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.02em;
+  color: var(--tis-bone);
+}
+
+/* ── Section H2 ── */
+h2 {
+  font-family: 'Cormorant Garamond', serif !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.05em;
+  color: var(--tis-bone);
+}
+
+/* ── Primary CTA — gold outline button ── */
+.button--primary,
+.button.button--primary,
+button.button--primary {
+  background: transparent !important;
+  color: var(--tis-gold) !important;
+  border: 1px solid var(--tis-gold) !important;
+  font-family: 'JetBrains Mono', 'IBM Plex Mono', 'Courier New', monospace !important;
+  font-size: 11px !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+  padding: 16px 36px !important;
+  border-radius: 0 !important;
+  transition: all 0.3s ease !important;
+}
+
+.button--primary:hover,
+.button.button--primary:hover {
+  background: var(--tis-gold) !important;
+  color: var(--tis-obsidian) !important;
+  border-color: var(--tis-gold) !important;
+}
+
+/* ── Secondary outline button ── */
+.button--secondary {
+  background: transparent !important;
+  color: var(--tis-bone) !important;
+  border: 1px solid var(--tis-veil) !important;
+  font-family: 'JetBrains Mono', 'IBM Plex Mono', monospace !important;
+  font-size: 11px !important;
+  letter-spacing: 0.15em !important;
+  text-transform: uppercase !important;
+  border-radius: 0 !important;
+}
+
+.button--secondary:hover {
+  border-color: var(--tis-bone) !important;
+}
+
+/* ── Cards ── */
+.card-wrapper,
+.card,
+.card--standard {
+  background: var(--tis-obsidian) !important;
+  border: none !important;
+}
+
+.card__heading,
+.card__heading a,
+.card-information__text {
+  font-family: 'Cormorant Garamond', serif !important;
+  font-weight: 500 !important;
+  font-size: 17px !important;
+  letter-spacing: 0.12em !important;
+  color: var(--tis-bone) !important;
+  text-transform: uppercase;
+}
+
+.card__subtitle,
+.card-information .product-subtitle {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  color: var(--tis-smoke) !important;
+  letter-spacing: 0.02em !important;
+  margin: 4px 0 8px 0 !important;
+  text-transform: none !important;
+}
+
+/* ── Prices ── */
+.price-item,
+.price-item--regular,
+.price__regular,
+.price__sale {
+  font-family: 'JetBrains Mono', 'IBM Plex Mono', monospace !important;
+  font-size: 13px !important;
+  color: var(--tis-bone) !important;
+  letter-spacing: 0.05em !important;
+  font-weight: 400 !important;
+}
+
+.price-item--sale {
+  color: var(--tis-gold) !important;
+}
+
+.price-item__last {
+  color: var(--tis-ash) !important;
+  text-decoration: line-through;
+}
+
+/* ── Header / Nav ── */
+.header,
+.section-header,
+header {
+  background: var(--tis-obsidian) !important;
+  border-bottom: 1px solid var(--tis-veil) !important;
+}
+
+.header__menu-item,
+.list-menu__item,
+nav a {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 12px !important;
+  letter-spacing: 0.15em !important;
+  text-transform: uppercase !important;
+  color: var(--tis-bone) !important;
+  font-weight: 400 !important;
+}
+
+.header__menu-item:hover,
+.list-menu__item:hover,
+nav a:hover {
+  color: var(--tis-gold) !important;
+}
+
+/* Logo center alignment polish */
+.header__heading-logo {
+  letter-spacing: 0.4em !important;
+}
+
+/* ── Footer ── */
+.footer,
+.section-footer {
+  background: var(--tis-ink) !important;
+  color: var(--tis-smoke) !important;
+  border-top: 1px solid var(--tis-veil) !important;
+}
+
+.footer a,
+.footer__content-bottom a {
+  color: var(--tis-smoke) !important;
+}
+
+.footer a:hover {
+  color: var(--tis-bone) !important;
+}
+
+.footer__heading {
+  font-family: 'Cormorant Garamond', serif !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  color: var(--tis-bone) !important;
+}
+
+/* ── Selection highlight (gold) ── */
+::selection {
+  background: var(--tis-gold);
+  color: var(--tis-obsidian);
+}
+::-moz-selection {
+  background: var(--tis-gold);
+  color: var(--tis-obsidian);
+}
+
+/* ── Scrollbar (subtle) ── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--tis-obsidian);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--tis-veil);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--tis-smoke);
+}
+
+/* ── Form inputs ── */
+input[type="text"],
+input[type="email"],
+input[type="search"],
+input[type="password"],
+textarea,
+select {
+  background: var(--tis-ink) !important;
+  border: 1px solid var(--tis-veil) !important;
+  color: var(--tis-bone) !important;
+  font-family: 'Inter', sans-serif !important;
+  border-radius: 0 !important;
+}
+
+input:focus,
+textarea:focus {
+  border-color: var(--tis-gold) !important;
+  outline: none !important;
+}
+
+input::placeholder {
+  color: var(--tis-ash) !important;
+  font-style: italic;
+}
+
+/* ── Badge (sale) ── */
+.badge,
+.product-badge {
+  background: var(--tis-gold) !important;
+  color: var(--tis-obsidian) !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 9px !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+  border-radius: 0 !important;
+  padding: 4px 10px !important;
+  font-weight: 400 !important;
+}
+
+/* ── Mobile polish ── */
+@media (max-width: 749px) {
+  .banner__heading,
+  h1.h1,
+  h1 {
+    font-size: clamp(28px, 8vw, 48px) !important;
+    line-height: 1.1 !important;
+  }
+
+  h2 {
+    font-size: clamp(20px, 5vw, 28px) !important;
+  }
+
+  .button--primary {
+    padding: 14px 28px !important;
+    font-size: 10px !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   END OF TISIDIAN OBSIDIAN MYTHOS DESIGN SYSTEM
+   ═══════════════════════════════════════════════════════════════ */

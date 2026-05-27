@@ -1,0 +1,162 @@
+{%- comment -%}
+  TISIDIAN — Story Block
+  Two-column section: cinematic image + brand story copy + CTA to /pages/story.
+  Place it BETWEEN Signature and Essentials collections on the homepage.
+{%- endcomment -%}
+
+<div class="tis-story-block">
+  <div class="tis-story-block__inner">
+    {%- if section.settings.image != blank -%}
+      <div class="tis-story-block__image">
+        <img
+          src="{{ section.settings.image | image_url: width: 1400 }}"
+          alt="{{ section.settings.image.alt | default: 'Tisidian archive' }}"
+          loading="lazy"
+        >
+      </div>
+    {%- endif -%}
+
+    <div class="tis-story-block__copy">
+      <p class="tis-story-block__overline">{{ section.settings.overline }}</p>
+      <h2 class="tis-story-block__heading">{{ section.settings.heading }}</h2>
+      <div class="tis-story-block__body">{{ section.settings.body }}</div>
+      {%- if section.settings.button_label != blank -%}
+        <a href="{{ section.settings.button_link }}" class="tis-story-block__button">
+          {{ section.settings.button_label }} <span class="tis-story-block__arrow">&rarr;</span>
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+<style>
+  .tis-story-block {
+    background: #14101F;
+    padding: 80px 24px;
+  }
+  .tis-story-block__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .tis-story-block__image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .tis-story-block__overline {
+    font-family: 'JetBrains Mono', 'IBM Plex Mono', monospace !important;
+    font-size: 10px !important;
+    letter-spacing: 0.22em !important;
+    text-transform: uppercase !important;
+    color: #C9A96E !important;
+    margin: 0 0 16px 0 !important;
+  }
+  .tis-story-block__heading {
+    font-family: 'Cormorant Garamond', serif !important;
+    font-weight: 500 !important;
+    font-size: 36px !important;
+    letter-spacing: 0.05em !important;
+    color: #F2EFE8 !important;
+    text-transform: uppercase;
+    margin: 0 0 24px 0 !important;
+    line-height: 1.15 !important;
+  }
+  .tis-story-block__body {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 15px !important;
+    line-height: 1.7 !important;
+    color: #9590A8 !important;
+    margin-bottom: 32px;
+  }
+  .tis-story-block__body p {
+    margin: 0 0 12px 0;
+  }
+  .tis-story-block__button {
+    display: inline-block;
+    font-family: 'JetBrains Mono', 'IBM Plex Mono', monospace !important;
+    font-size: 11px !important;
+    letter-spacing: 0.18em !important;
+    text-transform: uppercase !important;
+    color: #C9A96E !important;
+    border: 1px solid #C9A96E;
+    padding: 14px 28px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  .tis-story-block__button:hover {
+    background: #C9A96E;
+    color: #0A0813 !important;
+  }
+  .tis-story-block__arrow {
+    margin-left: 8px;
+    transition: transform 0.3s ease;
+    display: inline-block;
+  }
+  .tis-story-block__button:hover .tis-story-block__arrow {
+    transform: translateX(4px);
+  }
+
+  @media (max-width: 749px) {
+    .tis-story-block { padding: 56px 20px; }
+    .tis-story-block__inner {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    .tis-story-block__heading { font-size: 26px !important; }
+    .tis-story-block__body { font-size: 14px !important; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "TIS Story Block",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Cinematic image (use a Veo3 hero frame)"
+    },
+    {
+      "type": "text",
+      "id": "overline",
+      "label": "Overline (small, gold, ALL CAPS)",
+      "default": "THE ARCHIVE"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "AN ARCHIVE. NOT A BRAND."
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body",
+      "default": "<p>Tisidian assembles what others overlook. Sourced from estates. Kept for weight.</p><p>Each piece names itself.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "READ THE STORY"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link",
+      "default": "/pages/story"
+    }
+  ],
+  "presets": [
+    {
+      "name": "TIS Story Block"
+    }
+  ]
+}
+{% endschema %}

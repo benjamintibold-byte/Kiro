@@ -1,62 +1,94 @@
 /* ═══════════════════════════════════════════════════════════════
    TISIDIAN — OBSIDIAN MYTHOS DESIGN SYSTEM
-   Version: 1.0
+   Version: 1.1 — Dawn theme color scheme override added
    Telepítés: paste this entire block at the TOP of base.css
    ═══════════════════════════════════════════════════════════════ */
 
 :root {
-  /* Backgrounds */
   --tis-obsidian:   #0A0813;
   --tis-ink:        #14101F;
   --tis-mist:       #1F1A2E;
   --tis-veil:       #2A2440;
-
-  /* Text */
   --tis-bone:       #F2EFE8;
   --tis-smoke:      #9590A8;
   --tis-ash:        #5B5670;
-
-  /* Accents */
   --tis-gold:       #C9A96E;
   --tis-gold-glow:  #E0C088;
   --tis-crimson:    #6B1F2C;
   --tis-diamond:    #E8E6F0;
 }
 
-/* ── Global ── */
-body {
-  background: var(--tis-obsidian) !important;
-  color: var(--tis-bone) !important;
+/* ═══════════════════════════════════════════════════════════════
+   DAWN COLOR SCHEME OVERRIDE
+   Dawn applies background colors via .color-scheme-N classes on each
+   section, not on body. We force every scheme to TISIDIAN palette.
+   ═══════════════════════════════════════════════════════════════ */
+
+.color-scheme-1,
+.color-scheme-2,
+.color-scheme-3,
+.color-scheme-4,
+.color-scheme-5,
+.color-background-1,
+.color-background-2,
+.color-accent-1,
+.color-inverse,
+.gradient {
+  background: #0A0813 !important;
+  background-color: #0A0813 !important;
+  color: #F2EFE8 !important;
+  --color-background: 10, 8, 19;
+  --color-foreground: 242, 239, 232;
+  --color-button: 201, 169, 110;
+  --color-button-text: 10, 8, 19;
+  --color-secondary-button: 10, 8, 19;
+  --color-secondary-button-text: 242, 239, 232;
+  --color-secondary-button-border: 201, 169, 110;
+  --color-link: 201, 169, 110;
+  --color-badge-foreground: 10, 8, 19;
+  --color-badge-background: 201, 169, 110;
+  --color-badge-border: 201, 169, 110;
+}
+
+.color-background-2,
+.color-accent-2 {
+  background: #14101F !important;
+  background-color: #14101F !important;
+}
+
+/* ─── Global ─── */
+html, body {
+  background: #0A0813 !important;
+  color: #F2EFE8 !important;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
-/* ── Hero / H1 ── */
-.banner__heading,
-h1.h1,
-h1 {
+/* ─── Hero / H1 ─── */
+.banner__heading, h1.h1, h1 {
   font-family: 'Cormorant Garamond', 'Cinzel', serif !important;
   font-weight: 600 !important;
   letter-spacing: 0.02em;
-  color: var(--tis-bone);
+  color: #F2EFE8 !important;
 }
 
-/* ── Section H2 ── */
 h2 {
   font-family: 'Cormorant Garamond', serif !important;
   font-weight: 500 !important;
   letter-spacing: 0.05em;
-  color: var(--tis-bone);
+  color: #F2EFE8 !important;
 }
 
-/* ── Primary CTA — gold outline button ── */
+/* ─── Primary CTA — gold outline ─── */
 .button--primary,
 .button.button--primary,
-button.button--primary {
+button.button--primary,
+.shopify-payment-button__button--unbranded {
   background: transparent !important;
-  color: var(--tis-gold) !important;
-  border: 1px solid var(--tis-gold) !important;
-  font-family: 'JetBrains Mono', 'IBM Plex Mono', 'Courier New', monospace !important;
+  background-color: transparent !important;
+  color: #C9A96E !important;
+  border: 1px solid #C9A96E !important;
+  font-family: 'JetBrains Mono', 'IBM Plex Mono', monospace !important;
   font-size: 11px !important;
   font-weight: 400 !important;
   letter-spacing: 0.18em !important;
@@ -64,20 +96,20 @@ button.button--primary {
   padding: 16px 36px !important;
   border-radius: 0 !important;
   transition: all 0.3s ease !important;
+  box-shadow: none !important;
 }
 
 .button--primary:hover,
 .button.button--primary:hover {
-  background: var(--tis-gold) !important;
-  color: var(--tis-obsidian) !important;
-  border-color: var(--tis-gold) !important;
+  background: #C9A96E !important;
+  background-color: #C9A96E !important;
+  color: #0A0813 !important;
 }
 
-/* ── Secondary outline button ── */
 .button--secondary {
   background: transparent !important;
-  color: var(--tis-bone) !important;
-  border: 1px solid var(--tis-veil) !important;
+  color: #F2EFE8 !important;
+  border: 1px solid #2A2440 !important;
   font-family: 'JetBrains Mono', 'IBM Plex Mono', monospace !important;
   font-size: 11px !important;
   letter-spacing: 0.15em !important;
@@ -85,169 +117,120 @@ button.button--primary {
   border-radius: 0 !important;
 }
 
-.button--secondary:hover {
-  border-color: var(--tis-bone) !important;
-}
+.button--secondary:hover { border-color: #F2EFE8 !important; }
 
-/* ── Cards ── */
-.card-wrapper,
-.card,
-.card--standard {
-  background: var(--tis-obsidian) !important;
+/* ─── Cards ─── */
+.card-wrapper, .card, .card--standard, .card--media, .card--card {
+  background: #0A0813 !important;
+  background-color: #0A0813 !important;
   border: none !important;
+  box-shadow: none !important;
 }
 
 .card__heading,
 .card__heading a,
-.card-information__text {
+.card-information__text,
+.full-unstyled-link {
   font-family: 'Cormorant Garamond', serif !important;
   font-weight: 500 !important;
   font-size: 17px !important;
   letter-spacing: 0.12em !important;
-  color: var(--tis-bone) !important;
+  color: #F2EFE8 !important;
   text-transform: uppercase;
 }
 
-.card__subtitle,
-.card-information .product-subtitle {
+.card__subtitle, .card-information .product-subtitle {
   font-family: 'Inter', sans-serif !important;
   font-size: 12px !important;
   font-weight: 400 !important;
-  color: var(--tis-smoke) !important;
+  color: #9590A8 !important;
   letter-spacing: 0.02em !important;
   margin: 4px 0 8px 0 !important;
   text-transform: none !important;
 }
 
-/* ── Prices ── */
-.price-item,
-.price-item--regular,
-.price__regular,
-.price__sale {
+/* ─── Prices ─── */
+.price-item, .price-item--regular, .price__regular, .price__sale, .price {
   font-family: 'JetBrains Mono', 'IBM Plex Mono', monospace !important;
   font-size: 13px !important;
-  color: var(--tis-bone) !important;
+  color: #F2EFE8 !important;
   letter-spacing: 0.05em !important;
   font-weight: 400 !important;
 }
 
-.price-item--sale {
-  color: var(--tis-gold) !important;
-}
-
-.price-item__last {
-  color: var(--tis-ash) !important;
+.price-item--sale { color: #C9A96E !important; }
+.price-item__last, s.price-item--regular {
+  color: #5B5670 !important;
   text-decoration: line-through;
 }
 
-/* ── Header / Nav ── */
-.header,
-.section-header,
-header {
-  background: var(--tis-obsidian) !important;
-  border-bottom: 1px solid var(--tis-veil) !important;
+/* ─── Header / Nav ─── */
+.header, .section-header, header, .shopify-section-header, sticky-header {
+  background: #0A0813 !important;
+  background-color: #0A0813 !important;
+  border-bottom: 1px solid #2A2440 !important;
 }
 
-.header__menu-item,
-.list-menu__item,
-nav a {
+.header__menu-item, .list-menu__item, header nav a, .header__menu-item span {
   font-family: 'Inter', sans-serif !important;
   font-size: 12px !important;
   letter-spacing: 0.15em !important;
   text-transform: uppercase !important;
-  color: var(--tis-bone) !important;
+  color: #F2EFE8 !important;
   font-weight: 400 !important;
 }
 
-.header__menu-item:hover,
-.list-menu__item:hover,
-nav a:hover {
-  color: var(--tis-gold) !important;
+.header__menu-item:hover, .list-menu__item:hover, header nav a:hover {
+  color: #C9A96E !important;
 }
 
-/* Logo center alignment polish */
-.header__heading-logo {
-  letter-spacing: 0.4em !important;
+.header__heading-logo { letter-spacing: 0.4em !important; }
+
+/* ─── Footer ─── */
+.footer, .section-footer, footer {
+  background: #14101F !important;
+  background-color: #14101F !important;
+  color: #9590A8 !important;
+  border-top: 1px solid #2A2440 !important;
 }
 
-/* ── Footer ── */
-.footer,
-.section-footer {
-  background: var(--tis-ink) !important;
-  color: var(--tis-smoke) !important;
-  border-top: 1px solid var(--tis-veil) !important;
-}
-
-.footer a,
-.footer__content-bottom a {
-  color: var(--tis-smoke) !important;
-}
-
-.footer a:hover {
-  color: var(--tis-bone) !important;
-}
+.footer a, .footer__content-bottom a, footer a { color: #9590A8 !important; }
+.footer a:hover { color: #F2EFE8 !important; }
 
 .footer__heading {
   font-family: 'Cormorant Garamond', serif !important;
   letter-spacing: 0.12em !important;
   text-transform: uppercase !important;
-  color: var(--tis-bone) !important;
+  color: #F2EFE8 !important;
 }
 
-/* ── Selection highlight (gold) ── */
-::selection {
-  background: var(--tis-gold);
-  color: var(--tis-obsidian);
-}
-::-moz-selection {
-  background: var(--tis-gold);
-  color: var(--tis-obsidian);
-}
+/* ─── Selection (gold) ─── */
+::selection { background: #C9A96E; color: #0A0813; }
+::-moz-selection { background: #C9A96E; color: #0A0813; }
 
-/* ── Scrollbar (subtle) ── */
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: var(--tis-obsidian);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--tis-veil);
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--tis-smoke);
-}
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #0A0813; }
+::-webkit-scrollbar-thumb { background: #2A2440; }
+::-webkit-scrollbar-thumb:hover { background: #9590A8; }
 
-/* ── Form inputs ── */
-input[type="text"],
-input[type="email"],
-input[type="search"],
-input[type="password"],
-textarea,
-select {
-  background: var(--tis-ink) !important;
-  border: 1px solid var(--tis-veil) !important;
-  color: var(--tis-bone) !important;
+/* ─── Form inputs ─── */
+input[type="text"], input[type="email"], input[type="search"],
+input[type="password"], textarea, select {
+  background: #14101F !important;
+  border: 1px solid #2A2440 !important;
+  color: #F2EFE8 !important;
   font-family: 'Inter', sans-serif !important;
   border-radius: 0 !important;
 }
 
-input:focus,
-textarea:focus {
-  border-color: var(--tis-gold) !important;
-  outline: none !important;
-}
+input:focus, textarea:focus { border-color: #C9A96E !important; outline: none !important; }
+input::placeholder { color: #5B5670 !important; font-style: italic; }
 
-input::placeholder {
-  color: var(--tis-ash) !important;
-  font-style: italic;
-}
-
-/* ── Badge (sale) ── */
-.badge,
-.product-badge {
-  background: var(--tis-gold) !important;
-  color: var(--tis-obsidian) !important;
+/* ─── Badge ─── */
+.badge, .product-badge {
+  background: #C9A96E !important;
+  color: #0A0813 !important;
   font-family: 'JetBrains Mono', monospace !important;
   font-size: 9px !important;
   letter-spacing: 0.18em !important;
@@ -257,23 +240,14 @@ input::placeholder {
   font-weight: 400 !important;
 }
 
-/* ── Mobile polish ── */
+/* ─── Mobile ─── */
 @media (max-width: 749px) {
-  .banner__heading,
-  h1.h1,
-  h1 {
+  .banner__heading, h1.h1, h1 {
     font-size: clamp(28px, 8vw, 48px) !important;
     line-height: 1.1 !important;
   }
-
-  h2 {
-    font-size: clamp(20px, 5vw, 28px) !important;
-  }
-
-  .button--primary {
-    padding: 14px 28px !important;
-    font-size: 10px !important;
-  }
+  h2 { font-size: clamp(20px, 5vw, 28px) !important; }
+  .button--primary { padding: 14px 28px !important; font-size: 10px !important; }
 }
 
 /* ═══════════════════════════════════════════════════════════════

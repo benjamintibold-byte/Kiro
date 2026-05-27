@@ -1,113 +1,106 @@
-# KAIRO — OPERATOR KIT
+# TISIDIAN — OPERATOR KIT
 
-A complete, operator-grade setup for **Kairo** — a faceless Shopify brand built around unbranded mechanical watches and archive-aesthetic objects, framed as recoveries from fictional estates.
+A modern luxury watch brand. Faceless. Ghost middleman. AI-powered content. $0 ad budget. Pure organic.
 
 ```
-Brand:        Kairo
-Tagline:      Selected, not designed.
-Handler:      Section K
-Concept:      An archive of unbranded objects.
+Brand:        TISIDIAN
+Positioning:  Modern watchmaking, considered.
+Hero:         AURELION ($329)
+Model:        Faceless ghost middleman, no inventory
+Goal:         $0 → $5K via organic TikTok in 30-45 days
 ```
 
-This kit is the source-of-truth for every decision. If a question isn't answered here, the answer is **don't break the world**.
-
 ---
 
-## Where to start
+## 📂 Repo Structure
 
-Pick your path:
-
-### → If you want speed (recommended)
-**[00-sprint-launch.md](./00-sprint-launch.md)** — 30 days to first $5K. First sale by day 14. Daily checklists. Compressed timeline via pre-warming + DHL Express + 3-SKU MVP. Read this first.
-
-### → If you want safety
-**[11-zero-to-5k-roadmap.md](./11-zero-to-5k-roadmap.md)** — 8–10 weeks to $5K. Slower, less risk, more buffer. Read this if you have <$300 capital or <30 hrs/week available in week 1.
-
----
-
-## The full kit (read in order)
-
-| # | File | Purpose |
-|---|---|---|
-| 00 | [Sprint launch](./00-sprint-launch.md) | 30-day fast path to $5K |
-| 01 | [Brand bible](./01-brand-bible.md) | Concept, voice rules, **forbidden words**, name (Mörk) |
-| 02 | [Visual system](./02-visual-system.md) | Colors, fonts, photo grammar, **full LUT spec** |
-| 03 | [Product & pricing](./03-product-and-pricing.md) | Sourcing, pricing tiers, sample inspection |
-| 04 | [Shopify build](./04-shopify-build.md) | Theme settings + **Liquid + CSS** ready to paste |
-| 05 | [TikTok content system](./05-tiktok-content-system.md) | 3-account network, **20 visual hooks**, dossier reel anatomy |
-| 06 | [AI workflow](./06-ai-workflow.md) | **Claude prompts**, ElevenLabs voice spec, weekly cadence |
-| 07 | [Mythology bank](./07-mythology-bank.md) | **50 ready-to-use mythology templates** |
-| 08 | [Packaging system](./08-packaging-system.md) | Unboxing components, vendor list, $4–6/order |
-| 09 | [Email flows](./09-email-flows.md) | **All Klaviyo flows with copy** |
-| 10 | [Operator SOPs](./10-operator-sops.md) | Weekly cadence, comment templates, VA training |
-| 11 | [$0 → $5K roadmap](./11-zero-to-5k-roadmap.md) | Slower bootstrap (8–10 weeks) |
-| 12 | [12-month roadmap](./12-twelve-month-roadmap.md) | $5K → $500K/month scaling |
-| 13 | [Failure modes](./13-failure-modes.md) | The 15 ways this dies and how to prevent each |
-
----
-
-## Locked decisions (no further deliberation)
-
-These are committed. Don't re-debate them. Execute.
-
-| Decision | Locked value |
+### CURRENT — Use these
+| File | Purpose |
 |---|---|
-| Brand name | **Kairo** |
-| Tagline | *Selected, not designed.* |
-| Handler signature | *— Section K* (stamp: `K.`) |
-| Store background | `#0C0B0A` (true deep black) |
-| Card/content bg | `#1A1816` (charcoal-black) |
-| Text primary | `#D4CFC6` (warm off-white) |
-| Text secondary | `#8A8279` (muted stone) |
-| Accent color | `#7A2A20` (oxidized red — wax seals, single highlights only) |
-| Serif font | Cormorant Garamond, weight 400/500 |
-| Mono font | JetBrains Mono, weight 400 |
-| Voice | ElevenLabs custom: low male, ambiguous European, ~30–40, slow, flat |
-| Lot numbering start | Estate 049 (sounds aged) |
-| Modal price | $129 |
-| Pricing tiers | $89 / $129 / $179 / $249–349 / $600–1200 |
-| Discount policy | None. Forever. |
-| Face on camera | Never |
-| Posting cadence | 14 main / 4 field / 5 notes per week |
-| Email signoff | *— Section K* |
+| **[TISIDIAN-WEBSHOP-FINAL-MODS.md](./TISIDIAN-WEBSHOP-FINAL-MODS.md)** | 16-step Shopify cleanup tutorial. ~2 hours of work to launch-ready. |
+| **[TISIDIAN-WEEK-1-TIKTOK-LAUNCH.md](./TISIDIAN-WEEK-1-TIKTOK-LAUNCH.md)** | 7-day organic launch playbook with daily Veo3 prompts and exact captions. |
+
+### LEGACY — Reference only
+The `legacy/` folder contains the original operator kit from earlier brand iterations (Mörk → Kairo → TISIDIAN evolution). Some content still applies (faceless rules, packaging principles, conversion tactics) but the brand name, voice, and archive concept have been replaced.
+
+See [legacy/README.md](./legacy/README.md) for context.
 
 ---
 
-## The single rule
+## 🎯 The 3-line Brand
 
-> **Never break the world.**
-> 
-> No sales. No discount codes. No emojis. No "we" or "you." No CTAs. No face. No real-time trends. Ever.
+**What it is:** Modern luxury watchmaking with iced-out moissanite and exposed mechanical movements, sold direct via Shopify at $89-1199.
 
-If you can't commit to this rule for 12 months, do not start. The rule is the moat.
+**Why it works:** AI-generated cinematic product photography (Veo3) creates editorial luxury campaign quality at zero production budget. The visual ecosystem is consistent across the entire store — dark navy environments, wet obsidian surfaces, smoke, hand-worn references.
 
----
-
-## The method in one paragraph
-
-You build **Kairo**, a faceless Shopify brand framed as an archive of unbranded mechanical watches and objects, posed as recoveries from fictional estates. You source from 1688/Yupoo at $12–20 per piece and sell at $89–179, anchored by occasional $600+ Single Lots. The store is a dark museum interface, not an ecom site — no discounts, no CTAs, no popups, no faces, ever. You run three TikTok accounts as a content network — `@kairo` (dossier reels), `@kairo.field` (ambient world), `@kairo.notes` (text on black) — posting 2 reels/day on the main with strict aesthetic and audio consistency. Every estate launches as a 5–7 day content arc that creates appointment viewing. AI handles mythology generation and voiceover; you batch-shoot weekly with one LUT and one voice. Packaging includes a printed dossier card and a fictional polaroid that turns every customer into a free UGC node. A private list called The Ledger captures your top 5% buyers for repeat revenue. Discipline over time is the moat — competitors can copy a video, but they can't compress 12 months of consistent fiction.
+**The unfair advantage:** Faceless ghost middleman model. No physical inventory. No samples held. Pure orchestration of AI content + supplier fulfillment + organic TikTok.
 
 ---
 
-## Day 1 checklist (do this NOW)
+## 📦 Current Product Catalog
 
-```
-[ ] Buy kairo domain (kairo.co / kairoarchive.com / kairo.studio)
-[ ] Reserve @kairo on TikTok, Instagram
-[ ] Reserve @kairo.field and @kairo.notes on TikTok
-[ ] Open Shopify trial under the chosen domain
-[ ] Open Klaviyo account
-[ ] Open ElevenLabs account
-[ ] Open Notion / Airtable for asset library
-[ ] Order rubber stamp engraved "K." (~$15)
-[ ] Order phone macro lens (~$20)
-[ ] Begin 1688 / Yupoo browsing for first 3 sample SKUs
-```
+| Product | Price | Tier |
+|---|---|---|
+| **AURELION** (HERO) | $329 | Modal — primary TikTok focus |
+| **VANTH** | $179 | Mid — skeleton enthusiast |
+| **OBSYRIAN** | $1,199 | Halo — anchors price perception |
+| **AETHERION** | $729 | Premium |
+| **LUMERA** | $549 | Premium |
+| **VAULTRÉ Box** | $89 | Accessory upsell |
+| PHANTOM, VALTHER, ELYRA, ORIEN, VOID, LYSERA | $29-119 | Catalog depth |
 
-By end of Day 1: namespace locked, infrastructure accounts open, sourcing research started.
+**HERO product:** AURELION. All TikTok content centers around it. Bio link → direct AURELION product page (1 click to checkout).
 
-By end of Day 14: store live, content posting, first sales coming in.
+---
 
-By end of Day 35–42: $5K cumulative.
+## 🔑 Locked Decisions
 
-Read **[00-sprint-launch.md](./00-sprint-launch.md)** for the full daily plan.
+| Decision | Value |
+|---|---|
+| Brand name | **TISIDIAN** |
+| Positioning | Modern luxury, accessible pricing |
+| Operator model | Faceless ghost middleman |
+| Inventory | None held — supplier fulfilled |
+| Content tool | Veo3 + AI generation |
+| Ad budget | $0 (pure organic) |
+| Multi-account | iPhone (TE) + Android (haver) |
+| Hero product | AURELION ($329) |
+| Bio link | `tisidian.com/products/aurelion` |
+| Discount policy | None. Ever. |
+| Profit share with haver | 10% net, capped at $500/month |
+
+---
+
+## ⚡ Day 1 Quick Start
+
+If you're starting today:
+
+1. **Run through `TISIDIAN-WEBSHOP-FINAL-MODS.md`** (~2 hours) — backend cleanup
+2. **Set up accounts per `TISIDIAN-WEEK-1-TIKTOK-LAUNCH.md` Day 0** — 1 hour
+3. **Generate first 3 Veo3 videos** — 30 minutes
+4. **Tomorrow 10:00 AM:** First @tisidian post goes live
+
+---
+
+## 📊 Realistic Timeline
+
+| Milestone | Day |
+|---|---|
+| First post live | 2 |
+| First 5K-view video | 4-7 |
+| First sale | 5-10 |
+| $200-500 cumulative | 7-14 |
+| $1K cumulative | 14-21 |
+| $5K cumulative | 30-45 |
+
+These are median-execution numbers. Sub-median if posting drops below 3/day. Above-median if 1+ video crosses 100K views.
+
+---
+
+## 🚫 The Single Rule
+
+> **Don't pivot in the first 30 days.**
+
+The brand has changed names twice already (Mörk → Kairo → TISIDIAN). That's enough. The next 30 days are pure execution under the TISIDIAN identity. No rebranding, no concept changes, no new directions until $5K is hit.
+
+After $5K: re-evaluate. Before $5K: head down, post daily, ship consistently.

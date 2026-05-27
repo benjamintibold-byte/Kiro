@@ -17,7 +17,8 @@ Goal:         $0 → $5K via organic TikTok in 30-45 days
 ### CURRENT — Use these
 | File | Purpose |
 |---|---|
-| **[TISIDIAN-WEBSHOP-FINAL-MODS.md](./TISIDIAN-WEBSHOP-FINAL-MODS.md)** | 16-step Shopify cleanup tutorial. ~2 hours of work to launch-ready. |
+| **[TISIDIAN-WEBSHOP-FINAL-MODS.md](./TISIDIAN-WEBSHOP-FINAL-MODS.md)** | 16-step Shopify cleanup tutorial (backend: vendor, SKU, URL). ~2 hours. |
+| **[TISIDIAN-WEBSHOP-VISUAL-POLISH.md](./TISIDIAN-WEBSHOP-VISUAL-POLISH.md)** | 10-step visual identity system. Obsidian Mythos color palette + typography + hero/section/card polish + master CSS snippet. ~2-3 hours. |
 | **[TISIDIAN-WEEK-1-TIKTOK-LAUNCH.md](./TISIDIAN-WEEK-1-TIKTOK-LAUNCH.md)** | 7-day organic launch playbook with daily Veo3 prompts and exact captions. |
 
 ### LEGACY — Reference only

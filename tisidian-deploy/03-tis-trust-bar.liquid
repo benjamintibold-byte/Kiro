@@ -1,0 +1,80 @@
+{%- comment -%}
+  TISIDIAN — Trust Bar
+  Three-column metadata strip placed just below the hero.
+  Default: FREE WORLDWIDE SHIPPING . 2-YEAR MOVEMENT WARRANTY . SECURE STRIPE CHECKOUT
+{%- endcomment -%}
+
+<div class="tis-trust-bar">
+  <span class="tis-trust-bar__item">{{ section.settings.item_1 }}</span>
+  <span class="tis-trust-bar__divider">.</span>
+  <span class="tis-trust-bar__item">{{ section.settings.item_2 }}</span>
+  <span class="tis-trust-bar__divider">.</span>
+  <span class="tis-trust-bar__item">{{ section.settings.item_3 }}</span>
+</div>
+
+<style>
+  .tis-trust-bar {
+    background: #14101F;
+    border-top: 1px solid #2A2440;
+    border-bottom: 1px solid #2A2440;
+    padding: 18px 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    font-family: 'JetBrains Mono', 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #9590A8;
+    text-align: center;
+  }
+  .tis-trust-bar__divider {
+    color: #5B5670;
+    opacity: 0.6;
+  }
+
+  @media (max-width: 749px) {
+    .tis-trust-bar {
+      flex-direction: column;
+      gap: 8px;
+      padding: 14px 16px;
+      font-size: 9px;
+      letter-spacing: 0.15em;
+    }
+    .tis-trust-bar__divider { display: none; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "TIS Trust Bar",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "item_1",
+      "label": "Item 1",
+      "default": "FREE WORLDWIDE SHIPPING"
+    },
+    {
+      "type": "text",
+      "id": "item_2",
+      "label": "Item 2",
+      "default": "2-YEAR MOVEMENT WARRANTY"
+    },
+    {
+      "type": "text",
+      "id": "item_3",
+      "label": "Item 3",
+      "default": "SECURE STRIPE CHECKOUT"
+    }
+  ],
+  "presets": [
+    {
+      "name": "TIS Trust Bar"
+    }
+  ]
+}
+{% endschema %}

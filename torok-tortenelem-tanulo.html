@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0e7490">
+<title>Török Történelem – Vizsga Hack</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  :root {
+    --bg: #0b1220; --card: #131c2e; --card2:#1a2540; --accent: #22d3ee; --accent2:#f472b6;
+    --good:#34d399; --bad:#fb7185; --txt:#e6edf6; --muted:#93a4bd; --line:#243049;
+  }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: linear-gradient(160deg,#0b1220,#0e1a2e); color: var(--txt); min-height: 100vh; padding: 14px; }
+  .wrap { max-width: 640px; margin: 0 auto; }
+  h1 { font-size: 1.35rem; text-align:center; margin-bottom: 2px; letter-spacing:.3px; }
+  .sub { text-align:center; color: var(--muted); font-size:.8rem; margin-bottom: 14px; }
+  .pill { display:inline-block; background:var(--card2); color:var(--accent); border:1px solid var(--line);
+    padding:2px 10px; border-radius:999px; font-size:.72rem; margin:2px; }
+  .screen { display:none; }
+  .screen.active { display:block; animation: fade .25s ease; }
+  @keyframes fade { from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;} }
+  .topic-grid { display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-top:8px; }
+  .topic { background:var(--card); border:1px solid var(--line); border-radius:16px; padding:14px 12px;
+    cursor:pointer; transition: .15s; position:relative; overflow:hidden; }
+  .topic:active { transform: scale(.97); }
+  .topic .emoji { font-size:1.6rem; }
+  .topic .t-name { font-weight:600; margin-top:6px; font-size:.92rem; line-height:1.2; }
+  .topic .t-count { color:var(--muted); font-size:.72rem; margin-top:4px; }
+  .mode-row { display:flex; gap:8px; margin:14px 0; }
+  .mode-row button { flex:1; }
+  button { font-family:inherit; border:none; border-radius:12px; padding:12px 14px; font-size:.95rem;
+    font-weight:600; cursor:pointer; background:var(--card2); color:var(--txt); border:1px solid var(--line); transition:.15s; }
+  button:active { transform: scale(.97); }
+  .btn-accent { background: linear-gradient(135deg,var(--accent),#0891b2); color:#04141a; border:none; }
+  .btn-pink { background: linear-gradient(135deg,var(--accent2),#db2777); color:#fff; border:none; }
+  .topbar { display:flex; align-items:center; gap:10px; margin-bottom:12px; }
+  .topbar .back { padding:8px 12px; font-size:.85rem; }
+  .topbar .title { font-weight:700; font-size:1rem; flex:1; }
+  .progress { height:8px; background:var(--card); border-radius:999px; overflow:hidden; margin-bottom:14px; border:1px solid var(--line); }
+  .progress > div { height:100%; background:linear-gradient(90deg,var(--accent),var(--accent2)); width:0%; transition:.3s; }
+  /* Flashcard */
+  .flip { perspective: 1400px; margin-bottom:14px; }
+  .flip-inner { position:relative; width:100%; min-height: 340px; transition: transform .5s; transform-style: preserve-3d; cursor:pointer; }
+  .flip-inner.flipped { transform: rotateY(180deg); }
+  .face { position:absolute; inset:0; backface-visibility:hidden; -webkit-backface-visibility:hidden;
+    border-radius:20px; padding:22px; display:flex; flex-direction:column; justify-content:center; border:1px solid var(--line); }
+  .front { background: linear-gradient(160deg,#16233d,#101a2e); }
+  .back { background: linear-gradient(160deg,#1c2c1f,#13241a); transform: rotateY(180deg); border-color:#2f4a37; }
+  .face .label { font-size:.7rem; text-transform:uppercase; letter-spacing:1px; color:var(--muted); margin-bottom:10px; }
+  .face .term { font-size:1.45rem; font-weight:700; line-height:1.25; }
+  .face .def { font-size:1rem; line-height:1.5; color:#d7f5e2; overflow-y:auto; max-height:280px; }
+  .tap-hint { text-align:center; color:var(--muted); font-size:.72rem; margin-top:10px; }
+  .nav-row { display:flex; gap:8px; }
+  .nav-row button { flex:1; }
+  .counter { text-align:center; color:var(--muted); font-size:.8rem; margin:10px 0; }
+  /* Quiz */
+  .q-card { background:var(--card); border:1px solid var(--line); border-radius:18px; padding:20px; margin-bottom:14px; }
+  .q-term { font-size:1.2rem; font-weight:700; line-height:1.3; margin-bottom:6px; }
+  .q-sub { color:var(--muted); font-size:.8rem; }
+  .opt { display:block; width:100%; text-align:left; margin-bottom:10px; background:var(--card2); line-height:1.35; }
+  .opt.correct { background: rgba(52,211,153,.18); border-color: var(--good); color:#bdf5d8; }
+  .opt.wrong { background: rgba(251,113,133,.16); border-color: var(--bad); color:#ffd2da; }
+  .opt:disabled { opacity:1; cursor:default; }
+  .score { text-align:center; }
+  .score .big { font-size:3rem; font-weight:800; background:linear-gradient(135deg,var(--accent),var(--accent2));
+    -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .feedback { text-align:center; font-weight:600; min-height:22px; margin-bottom:8px; }
+  .tip { background:var(--card); border:1px dashed var(--line); border-radius:14px; padding:12px 14px; font-size:.85rem;
+    color:#cfe; margin-bottom:12px; line-height:1.45; }
+  .tip b { color:var(--accent); }
+  footer { text-align:center; color:var(--muted); font-size:.7rem; margin-top:20px; line-height:1.5; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🇹🇷 Török Történelem</h1>
+  <div class="sub">Vizsga-túlélő tanulóapp · kártya + kvíz</div>
+
+  <!-- HOME -->
+  <div id="home" class="screen active">
+    <div class="tip">😮‍💨 <b>Nyugi.</b> Holnap menni fog. Tipp: előbb <b>Kártya</b> módban menj végig 1-2x egy témán, aztán <b>Kvíz</b>-zel ellenőrizd. Az aktív felidézés a leggyorsabb hack.</div>
+    <div class="mode-row">
+      <button id="modeFlash" class="btn-accent">🃏 Kártya mód</button>
+      <button id="modeQuiz" class="btn-pink">❓ Kvíz mód</button>
+    </div>
+    <div style="text-align:center; margin:6px 0 4px; color:var(--muted); font-size:.8rem;">Válassz témát:</div>
+    <div id="topicGrid" class="topic-grid"></div>
+    <button id="allBtn" style="width:100%; margin-top:12px;">🎲 MINDEN téma keverve</button>
+  </div>
+
+  <!-- FLASHCARD -->
+  <div id="flash" class="screen">
+    <div class="topbar">
+      <button class="back" data-home>← Vissza</button>
+      <div class="title" id="flashTitle"></div>
+    </div>
+    <div class="progress"><div id="flashBar"></div></div>
+    <div class="flip"><div id="flipInner" class="flip-inner">
+      <div class="face front"><div class="label">Fogalom / Név / Évszám</div><div class="term" id="cardTerm"></div></div>
+      <div class="face back"><div class="label">Magyarázat</div><div class="def" id="cardDef"></div></div>
+    </div></div>
+    <div class="tap-hint">👆 Koppints a kártyára a megfordításhoz</div>
+    <div class="counter" id="flashCounter"></div>
+    <div class="nav-row">
+      <button id="prevCard">← Előző</button>
+      <button id="shuffleCard">🔀 Kever</button>
+      <button id="nextCard" class="btn-accent">Következő →</button>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div id="quiz" class="screen">
+    <div class="topbar">
+      <button class="back" data-home>← Vissza</button>
+      <div class="title" id="quizTitle"></div>
+    </div>
+    <div class="progress"><div id="quizBar"></div></div>
+    <div class="q-card">
+      <div class="q-sub" id="quizSub"></div>
+      <div class="q-term" id="quizTerm"></div>
+    </div>
+    <div class="feedback" id="quizFeedback"></div>
+    <div id="quizOpts"></div>
+  </div>
+
+  <!-- RESULT -->
+  <div id="result" class="screen">
+    <div class="topbar"><div class="title">Eredmény</div></div>
+    <div class="q-card score">
+      <div class="big" id="scoreBig"></div>
+      <div id="scoreMsg" style="margin-top:8px; font-weight:600;"></div>
+      <div id="scorePct" style="color:var(--muted); margin-top:4px;"></div>
+    </div>
+    <div class="nav-row">
+      <button id="retryWrong" class="btn-pink">🔁 Rosszakat újra</button>
+      <button id="retryAll" class="btn-accent">↻ Újra az egészet</button>
+    </div>
+    <button data-home style="width:100%; margin-top:10px;">🏠 Főmenü</button>
+  </div>
+
+  <footer>Sok sikert a vizsgán! 💪<br>Készült gyorstanuláshoz · adatok a saját jegyzeted alapján</footer>
+</div>
+<script>
+// ====== ADATOK ======
+const DECKS = [];
+</script>
+</body>
+</html>
+
+<script>
+// ===== 1. KÜLPOLITIKA (Erdogan-korszak, Davutoğlu, doktrínák) =====
+DECKS.push({ id:"kulpol", name:"Külpolitika & doktrínák", emoji:"🌍", cards:[
+ ["Ahmet Davutoğlu","Geopolitikus, a „Stratégiai mélység” szerzője. Külügyminiszter 2009–2014, miniszterelnök 2014–2016, 2019-től ellenzéki pártvezető."],
+ ["Stratégiai mélység (Stratejik Derinlik)","Davutoğlu elmélete/könyve Törökország geopolitikai helyzetéről és lehetőségeiről."],
+ ["Ahmad Sharaa / Dzsoláni","A Hayat Tahrir al-Sam (HTS) vezetője, a 2024 végi szíriai szunnita hatalomátvétel vezetője."],
+ ["Pénzváltó Nikolett","Kutató; 2019-es munkáját idézik az orosz-török érdekszférákról (Oroszország helye Törökország kül-, biztonság- és védelempolitikájában, 2016–2019)."],
+ ["1952","Törökország NATO-tagságának kezdete."],
+ ["1999 (külpol.)","Törökország EU-tagjelölti státuszt kap."],
+ ["2005","Az EU-csatlakozási tárgyalások kezdete."],
+ ["2002–2007","A török külpolitika fő orientációja: EU-csatlakozás."],
+ ["2009 (külpol.)","Nahcsiváni Szerződés (Türk Tanács létrehozása) + váltás a „közel külföldi aktivizmus” felé."],
+ ["2011–2013","Az Arab Tavasz felívelő szakasza – a „török modell” és iszlamista mozgalmak támogatása."],
+ ["2015 (külpol.)","Terrorellenes háború kezdete (PKK) + az orosz repülőgép lelövése (fél éves diplomáciai válság)."],
+ ["2016 (külpol.)","Orosz-török kiegyezés a gép-incidens után; a külpolitika militarizálódása és a szíriai intervenciók kezdete."],
+ ["2021 (külpol.)","Isztambuli csúcs: a Türk Tanács átalakul Türk Államok Szervezetévé (TÁSZ)."],
+ ["2021-től Détente","Enyhülés: lassú békülés az Öböl-államokkal, Egyiptommal, EU-val, Görögországgal, Izraellel."],
+ ["2023-tól (külpol.)","Gázai konfliktus, a viszony elmérgesedése Izraellel, hangsúlyos palesztinpártiság."],
+ ["2024 vége – „Szíria újratöltve”","A HTS meglepetésszerű győzelme és szunnita hatalomátvétel Szíriában."],
+ ["TÁSZ / Türk Tanács","2009-ben alapított, 2021-ben átnevezett politikai egyeztető platform (titkársággal, de nem EU-szerű)."],
+ ["TÁSZ tagjai","Azerbajdzsán, Kazahsztán, Kirgizisztán, Üzbegisztán, Törökország."],
+ ["TÁSZ megfigyelői","Magyarország, Türkmenisztán, Észak-Ciprusi Török Köztársaság."],
+ ["Magyarország a Türk Tanácsban","2018-ban kapott megfigyelői státuszt."],
+ ["Észak-Ciprusi Török Köztársaság","Csak Törökország ismeri el; megfigyelő a TÁSZ-ban; állandó nemzetközi feszültségforrás."],
+ ["PKK","Kurdisztáni Munkáspárt; Törökország 2015-től intenzív terrorellenes háborút folytat ellene."],
+ ["Hayat Tahrir al-Sam (HTS)","Iszlamista fegyveres szervezet, 2024 végén átvette a hatalmat Szíriában."],
+ ["Többes identitás","Törökország összetett identitás-kategóriái: balkáni, közel-keleti, földközi-tengeri, kaukázusi, közép-ázsiai/türk."],
+ ["Közel külföldi aktivizmus / Neooszmanizmus","2009-től: befolyásnövelés az egykori Oszmán Birodalom területein (Balkán, Közel-Kelet)."],
+ ["Török modell","Arab tavasz (2011–2013) idején hirdetett minta: a mérsékelt iszlám és demokrácia/modernizáció állítólagos ötvözete."],
+ ["Külpolitika militarizálódása","Katonai intervenciókra épülő stratégia, főleg 2016-tól (szíriai offenzívák)."],
+ ["Mavi Vatan (Kék Haza)","Tengeri doktrína: török igények az Égei-, Kelet-mediterrán és Fekete-tenger területeire (konfliktus Görögországgal, Ciprussal)."],
+ ["Orosz-török érdekszférák","A Fekete-tenger, Kaukázus, Közel-Kelet (Szíria) befolyási övezeteinek megosztása – konfliktus + pragmatikus együttműködés."],
+ ["Nahcsiváni Szerződés","A Türk Tanácsot megalapító nemzetközi szerződés (2009)."],
+ ["Davosi „egy perc” beszéd","Erdogan híres diplomáciai összetűzése – az Izrael-kapcsolatok megromlásának kezdete."],
+ ["Mavi Marmara flottilla incidens","Súlyos Izrael-török válság: egy Gázába tartó segélyhajó megtámadása."],
+ ["Orosz repülőgép lelövése (2015)","Törökország lelőtt egy orosz vadászgépet Szíria kapcsán → válság, majd 2016-os kiegyezés."],
+]});
+
+// ===== 2. BELPOLITIKA (AKP, Erdoğan, puccsok, CHP) =====
+DECKS.push({ id:"belpol", name:"Belpolitika (AKP-korszak)", emoji:"🏛️", cards:[
+ ["Recep Tayyip Erdoğan","Az AKP alapító vezetője. 2003-tól miniszterelnök, 2014-től köztársasági elnök."],
+ ["Abdullah Gül","AKP-politikus; a 2002-es győzelem utáni első miniszterelnök (míg Erdoğan tilalom alatt állt), majd 2007-től elnök."],
+ ["Ekrem İmamoğlu","Isztambul CHP-s főpolgármestere, ellenzéki államfőjelölt; 2025 márciusában letartóztatták."],
+ ["Abdullah Öcalan","A PKK alapítója (1978), 1999-ben fogták el."],
+ ["1978","A PKK megalakulása."],
+ ["1999 (belpol.)","Abdullah Öcalan elfogása."],
+ ["2001","Súlyos gazdasági válság + az AKP megalapítása."],
+ ["2002 (választás)","Az AKP első győzelme 34%-kal → a mandátumok közel kétharmada (abszolút többség)."],
+ ["2003","Alkotmánymódosítás után Erdoğan miniszterelnök; EU-orientált reformok kezdete."],
+ ["2004–2012","Háborús időszak a kurd konfliktusban."],
+ ["2007 (belpol.)","„E-memorandum” válság; előrehozott választás (AKP erősödik); alkotmánymódosítás: elnök közvetlen választása, 5 éves terminus; állandósul a kurd pártok jelenléte."],
+ ["2008","Betiltási eljárás az AKP ellen az alkotmánybíróságon – de nem tiltják be."],
+ ["2008–2011","Államapparátus átalakítása, szoros szövetség a Gülen-mozgalommal; Ergenekon- és Balyoz-perek."],
+ ["2009 (belpol.)","Első béketörekvések és tárgyalások a PKK-val."],
+ ["2010","Népszavazással elfogadott alkotmánymódosítás – gyengíti a bírói tanács és az alkotmánybíróság függetlenségét."],
+ ["2013","Gezi Park tüntetések; korrupciós botrányok → szakítás a Gülen-mozgalommal; újabb kurd békefolyamat."],
+ ["2015 (kettős választás)","Júniusban az AKP elveszíti, novemberben a snap-választáson visszaszerzi az abszolút többséget; a kurd békefolyamat összeomlik."],
+ ["2016. július 15.","Sikertelen katonai puccskísérlet Erdoğan ellen → rendkívüli állapot, tömeges tisztogatások."],
+ ["2017 (belpol.)","Népszavazás az elnöki rendszer bevezetéséről."],
+ ["2018 (belpol.)","Első elnökválasztás az új végrehajtó elnöki rendszerben – Erdoğan győz."],
+ ["2023 (választás)","Elnökválasztás: Erdoğan az egységes hatpárti ellenzék ellenében is újráz."],
+ ["2024 (önkormányzati)","A CHP nyeri az önkormányzati választást; újabb kurd békefolyamat kezdete."],
+ ["2025","İmamoğlu letartóztatása (március); várhatóan a PKK fegyverletétele és feloszlása."],
+ ["AKP","Igazság és Fejlődés Pártja; mérsékelt iszlamista gyökerű, 2001-ben alapított kormánypárt (2002 óta kormányoz)."],
+ ["CHP","Köztársasági Néppárt; szekuláris, balközép fő ellenzék; 2024-ben önkormányzati áttörés. Atatürk alapította."],
+ ["Gülen-mozgalom","Fethullah Gülen vallási-társadalmi mozgalma; 2011-ig AKP-szövetséges (beépült az igazságszolgáltatásba, rendőrségbe), 2013-tól esküdt ellenség, tisztogatások célpontja."],
+ ["Politikai hegemónia","Az AKP fokozatosan kiterjesztette kontrollját minden hatalmi ágra (végrehajtás, törvényhozás, igazságszolgáltatás, média, hadsereg) – a fékek és egyensúlyok felszámolása."],
+ ["E-memorandum (2007)","A hadsereg internetes állásfoglalása a világi rend védelmében az elnökválasztásnál – a társadalmi ellenállás miatt megbukott."],
+ ["Ergenekon- és Balyoz-perek","Koncepciós elemeket tartalmazó perek a 2000-es évek végén; az AKP és a Gülen-mozgalom megtörte a hadsereg és a szekuláris elit erejét."],
+ ["Gezi Park tüntetések (2013)","Park-átépítés elleni tiltakozásból országos kormány- és autokrácia-ellenes demonstrációsorozat."],
+ ["Elnöki rendszer (2017)","Szuperelnöki rezsim a parlamentáris helyett – a végrehajtó hatalom az elnök kezében, gyengébb parlament."],
+ ["Rendkívüli állapot (OHAL)","A 2016-os puccskísérlet után bevezetett különleges jogrend – rendeleti kormányzás, tömeges letartóztatások."],
+ ["Kurd kérdés","Törökország legnagyobb etnikai-kisebbségi problémája; a kurdok 4 állam (Tö., Szíria, Irak, Irán) területén élnek, autonómiáért/függetlenségért küzdenek."],
+]});
+</script>
+
+<script>
+// ===== 3. ÓKOR & TÜRK EREDET =====
+DECKS.push({ id:"okor", name:"Ókor & türk eredet", emoji:"🏺", cards:[
+ ["Egeresi Zoltán","A kurzus oktatója, a „A Török Köztársaság a történelemben” egyik szerzője."],
+ ["II. Ramszesz","Egyiptomi fáraó; a Hettita Birodalom fő közel-keleti vetélytársa."],
+ ["Orhan Pamuk","Nobel-díjas török író (a térképes mémben Isztambulnál említve)."],
+ ["i.e. 2. évezred","A Hettita Birodalom fennállása és virágzása Anatóliában."],
+ ["i.e. 17. század","A hettita Óbirodalom létrejötte."],
+ ["i.e. 14–13. század","A Hettita Újbirodalom kora – a térség meghatározó szuperhatalma."],
+ ["i.e. 9–6. század","Az Urartu királyság fennállása az Örmény-felföldön."],
+ ["i.e. 6. század","Urartu hanyatlása (méd és szkíta támadások + belső gyengülés)."],
+ ["Hsziungnu (Ázsiai Hun) Birodalom","i.e. 209 – i.sz. 93/156."],
+ ["Szienpi Birodalom","2–4. század."],
+ ["Ruran-Avar Birodalom","330–555 (Rouran Kaganátus)."],
+ ["Türk (Göktürk) Birodalom","552–600-as évek (első nagy korszak); Kaganátus 6–8. század."],
+ ["Második Türk Kaganátus","680–744."],
+ ["Ujgur Kaganátus","744–840."],
+ ["1533–1894","Az orosz expanzió korszaka – a sztyeppi birodalmak vége."],
+ ["Hattusa","A Hettita Birodalom fővárosa, politikai-vallási központ."],
+ ["Tengeri népek","Törzsek laza szövetsége; a bronzkor végén megdöntötték többek közt a Hettita Birodalmat."],
+ ["Urartu","Ókori királyság (i.e. 9–6. sz.) az Örmény-felföldön, Van-tó környékén. Fővárosa Tuspa (Van). Asszíria riválisa; erődök, öntözés, fémművesség, saját ékírás."],
+ ["Hellenizáció","A görög kultúra/nyelv/életmód elterjedése a Közel-Keleten és Anatóliában (Nagy Sándor után)."],
+ ["Bizánci (Keletrómai) Birodalom","A Római Birodalom keleti, görög nyelvű, keresztény utódállama; Anatólia volt a magterülete."],
+ ["Asina klán","A Türk Kaganátust megalapító uralkodói nemzetség (Szürke Farkas / Bozkurt legenda)."],
+ ["Ergenekon (mítosz)","A türkök mitikus őshazája, hozzáférhetetlen völgy az Altajban – innen tört ki a nép a Szürke Farkas vezetésével."],
+ ["Kagán / Kaganátus","A nomád törzsszövetségek uralkodójának címe (kagán) és birodalma (kaganátus)."],
+ ["Selyemút","Kelet-Ázsiát a Földközi-tengerrel összekötő kereskedelmi hálózat; a Türk Kaganátus is harcolt érte."],
+ ["Kurdok","Indoeurópai nép Kurdisztán hegyvidékén (Tö., Irán, Irak, Szíria). Nyelvük: kurd (kurmandzsi, szoráni). Többségük szunnita. A világ legnagyobb állam nélküli népe."],
+ ["Alevik","Törökországi vallási-kulturális közösség; szinkretikus hit (iszlám + síita + misztikus + helyi). Cemevikben gyakorolnak, fontos a zene/rítus; egyenlőség, tolerancia, takiye."],
+ ["Cemevi","Az alevi közösség vallási/közösségi háza (szemben a szunnita mecsettel)."],
+ ["Takiye","A valódi vallási hovatartozás eltitkolása az üldöztetés elkerülésére (főleg aleviknél)."],
+ ["Kemalizmus (mém)","Mustafa Kemal Atatürk ideológiája: szekularizáció + modernizáció + török identitás."],
+ ["Észak-anatóliai törésvonal","Aktív tektonikai törésvonal Észak-Törökországban – nagy földrengésveszély."],
+ ["Kelet-anatóliai törésvonal","Délkelet-Törökország; a 2023-as nagy földrengések kipattanási helye."],
+ ["Kőzetlemezek","Eurázsiai-, Anatóliai-, Arábiai-, Afrikai-lemez."],
+ ["Ararát-hegy","Törökország legmagasabb pontja (5137 m), keleti határ."],
+ ["Van-tó","Törökország legnagyobb tava Kelet-Anatóliában, Urartu központja."],
+ ["Márvány-tenger","Az Égei- és a Fekete-tengert összekötő belső tenger Isztambulnál."],
+ ["2023 (földrengés)","Pusztító törökországi-szíriai földrengések (M7.5 és M7.8)."],
+]});
+
+// ===== 4. OSZMÁN REFORMKOR (Tanzimat, hanyatlás → I. vh.) =====
+DECKS.push({ id:"reform", name:"Oszmán reformkor & I. vh.", emoji:"📜", cards:[
+ ["II. Mahmud (1808–1839)","Oszmán szultán: janicsárok szétverése, öltözködési reform, a fez bevezetése."],
+ ["Helmuth von Moltke","Katonai tanácsadó a birodalomban 1836–1839."],
+ ["Mohamed Ali (Egyiptom)","Vezetésével Egyiptom névleges függőségbe került az Oszmán Birodalomtól (később brit uralom)."],
+ ["Abdulmedzsid (1839–1861)","Szultán a Tanzimat idején; a Gülhane-i hatti serif kiadója."],
+ ["Abdulaziz (1861–1876)","Szultán a Tanzimat időszakában."],
+ ["II. Abdulhamid (1876–1909)","1876: alkotmány, 1878: felfüggeszti. Rendőrállam, iszlamizmus, nagyhatalmi lavírozás, Németország-közeledés, 1890-es évek örmény mészárlásai. 1909-ben eltávolítják."],
+ ["A három pasa","Enver, Talat, Cemal – az 1913 eleji puccs után hatalomra került vezetők."],
+ ["Sir Ian Hamilton & Sir Charles Monro","Brit parancsnokok a Gallipoli-hadjáratban."],
+ ["Tanzimat (1839–1876)","Az Oszmán Birodalom modernizációját célzó reformsorozat."],
+ ["Gülhane-i hatti serif (1839)","A modernizáció kezdő dokumentuma: élet/vagyon/becsület védelme, adóreform, vallástól független egyenlő jogok (elvben)."],
+ ["1856-os birodalmi rendelet","Krími háború hatására: megszünteti a vallási alapú megkülönböztetést (pl. oktatás), nem muszlimok hivatalt viselhetnek."],
+ ["Fez","Vörös fejfedő, II. Mahmud vezette be a ruházkodási reformban."],
+ ["Oszmán Államadósság Igazgatóság (1881-)","Külföldi hitelezők szerve a hiteltörlesztők beszedésére – az eladósodás miatt."],
+ ["Fiatal Oszmánok (1860-as évek)","Értelmiségiek: alkotmányt, parlamentet követeltek; iszlám + modern európai eszmék."],
+ ["Ifjútörökök (Jöntürk)","Radikálisabb mozgalom; az 1908-as forradalommal visszaállították az alkotmányt, modern központosított nemzetállam."],
+ ["Egység és Haladás Bizottsága","Az ifjútörök szervezet, amely hatalomra jutott és egypártrendszert épített ki."],
+ ["Örmény kérdés / népirtás (1915)","1890-es évek keleti mészárlásai, majd az I. vh. alatti (1915) tömeges deportálások és megsemmisítések."],
+ ["Sykes–Picot egyezmény (1916)","Titkos brit-francia (+orosz, olasz) terv az Oszmán Birodalom területeinek felosztására."],
+ ["Gallipoli (Dardanellák) hadjárat (1915–1916)","Anglo-francia hadművelet a szoros megnyitására és Konstantinápoly elfoglalására – kudarc."],
+ ["ANZAC","Ausztrál és új-zélandi hadtest a gallipoli partraszállásnál."],
+ ["1826 (janicsárok)","A janicsárok szétverése II. Mahmud által."],
+ ["1827 / 1828–1829","Navarinói csata; 9. orosz-török háború → adrianopoliszi béke, görög függetlenség elismerése."],
+ ["1853–1856","Krími háború → párizsi béke."],
+ ["1877–1878","10. orosz-török háború; a balkáni védvonalak áttörése."],
+ ["1878 (San Stefano + Berlin)","San Stefano-i béke (Nagy-Bulgária terve), majd a berlini kongresszus átrajzolta a határokat; Ciprus brit igazgatás alá."],
+ ["1908 / 1909","Ifjútörök forradalom, alkotmány visszaállítása; majd II. Abdulhamid eltávolítása."],
+ ["1911–1912 / 1912–1913","Olasz-török háború Líbiáért; Balkán-háborúk (súlyos oszmán veszteségek)."],
+ ["1913","Katonai puccs (három pasa); londoni béke; a 2. balkáni háború után bukaresti béke → Edirne visszakerül."],
+ ["1914–1918","I. világháború: az oszmánok 1914 októberében léptek be a németek oldalán; többfrontos háború; arab felkelés."],
+]});
+</script>
+
+<script>
+// ===== 5. SZELDZSUKOK & MONGOLOK (középkor) =====
+DECKS.push({ id:"szeldzsuk", name:"Szeldzsukok & mongolok", emoji:"🐺", cards:[
+ ["Szeldzsuk","Oguz törzsfő (a dinasztia névadója)."],
+ ["Togril (Tuğrul) & Çağrı","Török vezetők, akik népükkel Hvárezmbe vonultak."],
+ ["Alp Arszlán (1063–1073)","Szeldzsuk szultán, a manzikerti csata (1071) győztes hadvezére."],
+ ["Máliksah (1072–1092)","Szeldzsuk uralkodó – a birodalom virágkora."],
+ ["II. (Bolgárölő) Bazileosz (975–1028)","Bizánci császár, leigázta a Bolgár Birodalmat."],
+ ["IV. Romanosz Diogenész","Bizánci császár, vesztes a manzikerti csatában Alp Arszlán ellen."],
+ ["Alexiosz Komnénosz (1081–1118)","Bizánci császár, területvisszafoglalások; a Komnénosz-dinasztia tagja."],
+ ["Mánuel Komnénosz (1143–1180)","Bizánci császár; alatta a Rumi Szultanátus a vazallusa lett."],
+ ["II. Kilics Arszlán","Rumi szultán; 1176-ban a müriokephalóni csatában legyőzte a bizánciakat."],
+ ["Palailogosz Mihály","Bizánci uralkodó, 1261-ben visszavette Konstantinápolyt."],
+ ["Dzsingisz kán","A Mongol Birodalom alapítója; halála 1227, a birodalom felosztása fiai közt."],
+ ["Batu kán","Az Arany Horda vezetője, európai hadjáratok irányítója."],
+ ["Hüleghű (Hulegu)","Az Ilkhán Birodalom létrehozója (Bagdad elfoglalása 1258 után)."],
+ ["Kubilai kán","Mongol nagykán, Kína uralkodója (Yuan-dinasztia 1272-)."],
+ ["Baiju","Mongol hadvezér, a kösedagi csata (1243) győztese."],
+ ["Ahmed Yesevi (1093–1167?)","A jeszevik szúfi rend alapítója."],
+ ["Dzsaláladdín Rúmí","Szúfi misztikus, a mevlevik szellemi atyja."],
+ ["Hadzsi Bektas Veli","A bektasik rend alapítója."],
+ ["Yunus Emre (1238–1320?)","Török dervis, költő, szúfi misztikus."],
+ ["1040 (Dandanakan)","A dandanakani csata: a szeldzsukok legyőzik a Gaznavidákat."],
+ ["1055","A szeldzsukok bevonulnak Bagdadba."],
+ ["1071 (Manzikert)","A manzikerti csata – szeldzsuk győzelem Bizánc felett (kulcsdátum!)."],
+ ["1176 (Müriokephalon)","A bizánciak súlyos veresége II. Kilics Arszlántól."],
+ ["1204 (4. keresztes hadjárat)","Konstantinápoly eleste, a Latin Császárság megalapítása."],
+ ["1243 (Köszedag)","Mongol győzelem a rumi szultán felett."],
+ ["1261","Palailogosz Mihály visszaveszi Konstantinápolyt (bizánci restauráció)."],
+ ["11. század (beáramlás)","A török törzsek első nagy beáramlása Anatóliába."],
+ ["13. század (beáramlás)","Második nagy beáramlás a mongol támadások miatt."],
+ ["Gaznavidák / Karahanidák","Közép-ázsiai iszlám/török birodalmak a szeldzsukok előtt."],
+ ["Rumi Szultanátus","Középkori török állam Anatóliában; multietnikus udvar, fő nyelve a perzsa volt. Virágkor: 13. sz. első fele; az utolsó szultán 1308-ban halt meg."],
+ ["Arany Horda (Kipcsak Kánság)","Mongol utódállam Kelet-Európában."],
+ ["Csagatáj Kánság / Ilkhán Birodalom","További mongol utódállamok (uluszok)."],
+ ["Török bégségek (beylikek)","Kisebb török fejedelemségek Anatóliában (14. sz.)."],
+ ["Thema-rendszer","Bizánci katonai-közigazgatási berendezkedés; leépítése gyengítette Bizáncot."],
+ ["Szúfizmus (tasavuf)","Az iszlám misztikus irányzata; cél az istenélmény (faná = az ego felszámolása, isteni egység)."],
+ ["Jeszevik / Mevlevik / Bektasik","Szúfi dervisrendek; a bektasi népszerű volt a janicsárok közt. 1924-ben betiltották őket."],
+]});
+
+// ===== 6. KÖZTÁRSASÁG 1950–2016 (puccsok, Ciprus, EU) =====
+DECKS.push({ id:"koztars", name:"Köztársaság 1950–2016", emoji:"⚔️", cards:[
+ ["Adnan Menderes","A Demokrata Párt vezetője, megnyerte az 1950-es választást. Növekedés, majd infláció és autoriter lépések; az 1960-as puccs megbuktatta."],
+ ["Süleyman Demirel","Az Igazság Pártja (AP) vezetője, az 1960–70-es évek meghatározó alakja; gyakran Ecevit ellenfele."],
+ ["Bülent Ecevit","CHP-vezető, többszörös miniszterelnök; az 1974-es ciprusi intervenció kulcsfigurája."],
+ ["Turgut Özal","Az 1980-as puccs utáni vezető; gazdasági liberalizáció, turizmus; 1989–1993 államfő."],
+ ["Alparslan Türkeş","A nacionalista mozgalom vezetője, az MHP alapítója; a Szürke Farkasok kötődnek hozzá."],
+ ["Lyndon B. Johnson","Az USA elnöke; 1964-es levelében figyelmeztette Törökországot, ne avatkozzon be Cipruson."],
+ ["Makariosz III","Ciprus vezetője és ortodox érseke; az ellene végrehajtott 1974-es görög puccs vezetett a török beavatkozáshoz."],
+ ["1950","A Demokrata Párt győzelme – vége a CHP egyeduralmának."],
+ ["1960","Az első sikeres katonai puccs – Menderes kormányának megdöntése."],
+ ["1961","Új alkotmány – több szabadság a politikai szervezeteknek."],
+ ["1971","A hadsereg ultimátuma (muhtira) – a kormány lemondásra kényszerül."],
+ ["1974","Görög puccs Cipruson Makariosz ellen → török katonai beavatkozás."],
+ ["1980","A második nagy katonai puccs – véget vet a szélsőbal-szélsőjobb erőszaknak."],
+ ["1982","Turgut Özal választási győzelme – új politikai korszak."],
+ ["1983","Kikiáltják az Észak-ciprusi Török Köztársaságot."],
+ ["1984","A PKK fegyveres harcot indít a török állam ellen."],
+ ["1987","Özal jelzi Törökország EU-tagsági szándékát."],
+ ["1995–1996","Vámunió az EU és Törökország között."],
+ ["1997","Posztmodern puccs – a hadsereg nyomást gyakorol a kormányra."],
+ ["1999 (köztárs.)","Törökország EU-tagjelölti státuszt kap."],
+ ["2016 (köztárs.)","Sikertelen katonai puccskísérlet Erdoğan kormánya ellen."],
+ ["Demokrata Párt (DP)","Konzervatív párt, 1950-ben Menderes vezetésével hatalomra került."],
+ ["AP (Igazság Pártja)","Jobboldali párt; legismertebb vezetője Süleyman Demirel."],
+ ["ANAP (Anavatan Partisi)","Turgut Özal pártja; az 1980-as évek gazdasági reformjai."],
+ ["Puccs (darbe)","A hadsereg erőszakos hatalomátvétele, a kormány eltávolítása."],
+ ["Muhtira","A hadsereg ultimátuma a kormánynak (lemondás / politikaváltás)."],
+ ["Gazdasági liberalizáció","Állami beavatkozás csökkentése, piacgazdaság – Özal politikájának alapja."],
+ ["Szürke Farkasok (Bozkurt)","Az MHP-hez kötődő szélsőjobboldali mozgalom."],
+ ["EOKA","Görög ciprusi szervezet az enoszisz (egyesülés Görögországgal) céljáért."],
+ ["Enoszisz / Taksim","Enoszisz = Ciprus egyesítése Görögországgal; Taksim = Ciprus felosztása görög-török részre."],
+ ["Garantori státusz","A Zürichi szerződés alapján Tö., Görögo. és az Egyesült Királyság védhette Ciprus alkotmányos rendjét."],
+ ["Zürichi szerződés (1959)","Megállapodás, amely előkészítette Ciprus függetlenségét."],
+ ["Ankarai szerződés (1963)","Törökország és az EGK társulási megállapodása."],
+ ["Vámunió","Gazdasági együttműködés: a tagok egymás közt vámmentesen kereskednek."],
+]});
+</script>
+
+<script>
+// ===== 7. OSZMÁN HANYATLÁS (Nők szultanátusa, Köprülü, Bécs) =====
+DECKS.push({ id:"hanyatlas", name:"Oszmán hanyatlás", emoji:"🌙", cards:[
+ ["Hürrem szultána","Szulejmán felesége; a „nők szultanátusa” egyik legismertebb alakja, nagy udvari befolyással."],
+ ["Szulejmán","Az Oszmán Birodalom egyik legnagyobb uralkodója – alatta érte el a hatalma csúcsát."],
+ ["Nurbanu szultána","II. Szelim felesége, jelentős udvari-politikai befolyással."],
+ ["II. Szelim","Szulejmán utóda; alatta tovább nőtt a hárem politikai szerepe."],
+ ["Safiye szultána","A nők szultanátusának egyik fontos alakja (III. Murád felesége)."],
+ ["Kösem szultána","Az egyik legbefolyásosabb oszmán asszony, régensként is irányította az államot."],
+ ["Turhan szultána","A nők szultanátusának utolsó jelentős alakja."],
+ ["Köprülü Mehmed","A Köprülü-restauráció elindítója: rendbe tette az államigazgatást és a hadsereget."],
+ ["Köprülü Ahmed","Folytatta apja reformjait, sikeres hódító politika."],
+ ["Kara Musztafa","Az 1683-as bécsi ostrom vezetője; veresége fordulópont az oszmán terjeszkedésben."],
+ ["Sobieski János","A bécsi ostrom felmentő seregének vezetője – döntő szerep az oszmán vereségben."],
+ ["III. Ahmed","A tulipán korszak uralkodója – kulturális fejlődés, részleges modernizáció."],
+ ["Ibrahim Müteferrika","Magyar származású értelmiségi; meghonosította a könyvnyomtatást az Oszmán Birodalomban."],
+ ["III. Szelim","A Nizám-i Dzsedid reformprogram kezdeményezője (hadsereg/állam modernizálása)."],
+ ["Napóleon Bonaparte","1798-ban megtámadta Egyiptomot – megmutatta az oszmán katonai gyengeséget."],
+ ["1593–1606","Tizenöt éves háború a Habsburgok ellen – az oszmán katonai rendszer korlátai."],
+ ["1596 (Mezőkeresztes)","Fontos oszmán győzelem, de nem hozott döntő fordulatot."],
+ ["1606 (Zsitvatorok)","Lezárta a tizenöt éves háborút; jelezte az oszmán fölény csökkenését."],
+ ["1683 (Bécs)","Bécs sikertelen ostroma – az oszmán terjeszkedés végpontja Európában."],
+ ["1684–1699","A Szent Liga háborúja a keresztény hatalmak összefogásával."],
+ ["1686 (Buda)","Buda elvesztése – Magyarország legfontosabb központja."],
+ ["1699 (Karlóca)","Az első nagy béke, amelyben az Oszmán Birodalom jelentős területeket veszített."],
+ ["1718–1730 (Tulipán korszak)","Békés, kulturálisan virágzó időszak; első nyugati minták."],
+ ["1774 (Kücsük-Kajnardzsa)","Súlyos vereség Oroszországtól – orosz befolyás az oszmán ortodoxok felett."],
+ ["1783 (Krím)","Krím orosz annektálása – fontos vazallus állam elvesztése."],
+ ["1807","A janicsárok felkelése megbuktatta III. Szelimet és reformjait."],
+ ["Nők szultanátusa","16–17. sz.: a szultán anyjai/feleségei jelentős politikai befolyást gyakoroltak."],
+ ["Valide szultána","A szultán anyja – az udvar egyik legbefolyásosabb személye."],
+ ["Haszeki szultána","A szultán első számú felesége / kedvence."],
+ ["Hárem","A szultáni palota női része – politikai központként is működött."],
+ ["Dzseláli felkelések","Anatóliai lázadások (16–17. sz.): infláció, adóterhek, gyengülő központi hatalom."],
+ ["Köprülü-restauráció","A 17. sz. második felének reformjai – átmenetileg megerősítette a birodalmat."],
+ ["Szent Liga","Habsburgok, Lengyelország, Velence, Oroszország, Pápai Állam szövetsége az oszmánok ellen."],
+ ["Malikane","Hosszú távú adóbérleti rendszer – magánszemélyek szedték az adót az állam helyett."],
+ ["Ajánok (Ayanok)","Helyi előkelők/tartományi vezetők; a központi hatalom gyengülésével önállósodtak."],
+ ["Porta","Az oszmán központi kormányzat/államhatalom hagyományos elnevezése."],
+ ["Kapitulációs szerződés","Külföldi államoknak adott kereskedelmi kiváltság – hosszú távon gazdasági függőség."],
+ ["Nizám-i Dzsedid („Új Rend”)","III. Szelim reformprogramja: európai mintájú hadsereg, modernebb államigazgatás."],
+ ["Defenzív modernizáció","Nem önmagáért való nyugatiasodás, hanem a katonai-politikai túlélés biztosítása."],
+ ["A hanyatlás 5 oka","1) Katonai lemaradás 2) Hosszú, költséges háborúk 3) Belső válságok (dzseláli, infláció) 4) Gyengülő központi hatalom (ajánok) 5) Gazdasági függőség (kapitulációk)."],
+]});
+
+// ===== 8. ATATÜRK & KÖZTÁRSASÁG ALAPÍTÁS =====
+DECKS.push({ id:"ataturk", name:"Atatürk & köztársaság", emoji:"🇹🇷", cards:[
+ ["Musztafa Kemal Atatürk (1881–1938)","A modern Törökország megalapítója, gallipoli hős, a függetlenségi háború vezetője, radikális reformer."],
+ ["Kasim Karabekir tábornok","A 7. hadsereg parancsnoka, később a Progresszív Köztársasági Párt alapítója."],
+ ["İsmet İnönü","Atatürk utódja (1938–1950); II. vh. egyensúlyozó külpolitika, nyitás az USA felé."],
+ ["Fethi Okyar","A Liberális Köztársasági Párt vezetője az 1930-as többpárti kísérletben."],
+ ["Celal Bayar & Adnan Menderes","A Demokrata Párt alapítói (1946); 1950-ben megtörték a CHP egyeduralmát."],
+ ["Said seyh","Az 1925-ös kurd lázadás vezetője."],
+ ["1918 (Mudrosz)","Mudroszi fegyverszünet – az Oszmán Birodalom összeomlása."],
+ ["1919. május 19.","Atatürk partraszállása Samsunban – a függetlenségi háború kezdete."],
+ ["1919 nyár/ősz","Havzai és amasyai körlevelek; erzurumi és sivasi kongresszusok."],
+ ["1920 (Nemzeti Paktum + TBMM)","A Nemzeti Paktum elfogadása Isztambulban; április 23.: a Nemzetgyűlés (TBMM) megnyitása Ankarában."],
+ ["1920. augusztus 10. (Sevres)","A sevrési béke – a birodalom feldarabolása (a nemzetiek elutasították)."],
+ ["1923. július 24. (Lausanne)","Görögök legyőzése, a Szultanátus megszüntetése, majd a lausanne-i béke – a mai határok elismerése."],
+ ["1923. október 29.","A Török Köztársaság kikiáltása."],
+ ["1924 / 1928 / 1934","Kalifátus eltörlése; latin betűs írásreform; nők választójoga."],
+ ["1936 / 1937","Montreux-i egyezmény (szorosok ellenőrzése); a „Hat Nyíl” rögzítése az alkotmányban."],
+ ["1938–1939 (Hatay)","Hatay Állam megalakulása és békés csatlakozása Törökországhoz."],
+ ["Nemzeti Paktum (Misak-ı Millî)","Az oszmán parlament utolsó programja Anatólia és Kelet-Trákia egységéről."],
+ ["Nutuk (Beszéd)","Atatürk 1927-es nagy beszéde – legitimálta szerepét, rögzítette a köztársaság ideológiai alapjait."],
+ ["Kemalizmus – A Hat Nyíl","Köztársaságiság, Szekularizmus, Nacionalizmus, Etatizmus (állami gazdaság), Populizmus (népiség), Forradalmiság."],
+ ["Nemzetiesítés","Kurd felkelések leverése, asszimiláció („hegyi törökök”), Török Történelmi Társaság (hettita kultusz)."],
+ ["Balkán Paktum (1934)","Védelmi szövetség a revizionizmus (Bulgária, Olaszország) ellen."],
+ ["Status quo külpolitika","Egyensúlyozás a nagyhatalmak közt a két vh. közt; a szovjet veszély miatt USA-közeledés (Marshall-segély, NATO)."],
+ ["Diyanet","Vallásügyi hivatal – a szekularizmus (állami valláskontroll) eszköze."],
+]});
+</script>
+
+<script>
+// ====== APP LOGIKA ======
+const $ = s => document.querySelector(s);
+const screens = { home:$('#home'), flash:$('#flash'), quiz:$('#quiz'), result:$('#result') };
+function show(name){ Object.values(screens).forEach(s=>s.classList.remove('active')); screens[name].classList.add('active'); window.scrollTo(0,0); }
+function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+
+// --- Téma rács felépítése ---
+let currentMode = 'flash';
+const grid = $('#topicGrid');
+DECKS.forEach(d=>{
+  const el = document.createElement('div');
+  el.className='topic';
+  el.innerHTML = `<div class="emoji">${d.emoji}</div><div class="t-name">${d.name}</div><div class="t-count">${d.cards.length} tétel</div>`;
+  el.onclick = ()=> startDeck(d.cards.slice(), d.name);
+  grid.appendChild(el);
+});
+$('#modeFlash').onclick = ()=>{ currentMode='flash'; $('#modeFlash').style.outline='2px solid #fff'; $('#modeQuiz').style.outline='none'; };
+$('#modeQuiz').onclick  = ()=>{ currentMode='quiz';  $('#modeQuiz').style.outline='2px solid #fff'; $('#modeFlash').style.outline='none'; };
+$('#modeFlash').style.outline='2px solid #fff';
+$('#allBtn').onclick = ()=>{ const all=[]; DECKS.forEach(d=>d.cards.forEach(c=>all.push(c))); startDeck(shuffle(all), 'Minden téma keverve'); };
+document.querySelectorAll('[data-home]').forEach(b=> b.onclick=()=>show('home'));
+
+function startDeck(cards, title){
+  if(currentMode==='flash') startFlash(cards, title);
+  else startQuiz(cards, title);
+}
+
+// --- KÁRTYA MÓD ---
+let fCards=[], fIdx=0;
+function startFlash(cards, title){
+  fCards = cards; fIdx = 0;
+  $('#flashTitle').textContent = title;
+  show('flash'); renderCard();
+}
+function renderCard(){
+  const c = fCards[fIdx];
+  $('#flipInner').classList.remove('flipped');
+  $('#cardTerm').textContent = c[0];
+  $('#cardDef').textContent = c[1];
+  $('#flashCounter').textContent = `${fIdx+1} / ${fCards.length}`;
+  $('#flashBar').style.width = ((fIdx+1)/fCards.length*100)+'%';
+}
+$('#flipInner').onclick = ()=> $('#flipInner').classList.toggle('flipped');
+$('#nextCard').onclick = ()=>{ fIdx=(fIdx+1)%fCards.length; renderCard(); };
+$('#prevCard').onclick = ()=>{ fIdx=(fIdx-1+fCards.length)%fCards.length; renderCard(); };
+$('#shuffleCard').onclick = ()=>{ fCards=shuffle(fCards); fIdx=0; renderCard(); };
+
+// --- KVÍZ MÓD ---
+let qCards=[], qIdx=0, qScore=0, qWrong=[], qPool=[];
+function startQuiz(cards, title){
+  qPool = cards;
+  qCards = shuffle(cards); qIdx=0; qScore=0; qWrong=[];
+  $('#quizTitle').textContent = title;
+  show('quiz'); renderQuiz();
+}
+function renderQuiz(){
+  if(qIdx >= qCards.length){ return finishQuiz(); }
+  const c = qCards[qIdx];
+  $('#quizSub').textContent = `${qIdx+1} / ${qCards.length} kérdés`;
+  $('#quizTerm').textContent = c[0];
+  $('#quizBar').style.width = (qIdx/qCards.length*100)+'%';
+  $('#quizFeedback').textContent='';
+  // rossz válaszok más kártyák magyarázataiból
+  const others = shuffle(qPool.filter(x=>x[1]!==c[1])).slice(0,3).map(x=>x[1]);
+  const opts = shuffle([c[1], ...others]);
+  const box = $('#quizOpts'); box.innerHTML='';
+  opts.forEach(opt=>{
+    const b=document.createElement('button');
+    b.className='opt'; b.textContent=opt;
+    b.onclick = ()=> answer(b, opt===c[1], c);
+    box.appendChild(b);
+  });
+}
+function answer(btn, correct, card){
+  const all = $('#quizOpts').querySelectorAll('.opt');
+  all.forEach(b=>{ b.disabled=true; if(b.textContent===card[1]) b.classList.add('correct'); });
+  if(correct){ qScore++; $('#quizFeedback').textContent='✅ Helyes!'; $('#quizFeedback').style.color='var(--good)'; }
+  else { btn.classList.add('wrong'); qWrong.push(card); $('#quizFeedback').textContent='❌ A helyes válasz kiemelve'; $('#quizFeedback').style.color='var(--bad)'; }
+  setTimeout(()=>{ qIdx++; renderQuiz(); }, correct?650:1500);
+}
+function finishQuiz(){
+  $('#quizBar').style.width='100%';
+  const pct = Math.round(qScore/qCards.length*100);
+  $('#scoreBig').textContent = `${qScore}/${qCards.length}`;
+  $('#scorePct').textContent = `${pct}% helyes`;
+  let msg = pct>=90?'🏆 Profi vagy! Készen állsz!' : pct>=70?'💪 Nagyon jó, már majdnem megvan!' : pct>=50?'📚 Halad, ismételd át a rosszakat!' : '🔁 Menj végig még egyszer kártyában, megy ez!';
+  $('#scoreMsg').textContent = msg;
+  $('#retryWrong').style.display = qWrong.length ? 'block':'none';
+  const wrongSnapshot = qWrong.slice();
+  $('#retryWrong').onclick = ()=>{ qCards=shuffle(wrongSnapshot); qIdx=0; qScore=0; qWrong=[]; show('quiz'); renderQuiz(); };
+  $('#retryAll').onclick = ()=>{ qCards=shuffle(qPool); qIdx=0; qScore=0; qWrong=[]; show('quiz'); renderQuiz(); };
+  show('result');
+}
+</script>
